@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "748681804678",
+    "project_id": "nachhilfeapp-d141c",
+    "storage_bucket": "nachhilfeapp-d141c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748681804678:android:6e5d9f389a2b315a468a07",
+        "android_client_info": {
+          "package_name": "com.example.nachhilfe_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748681804678-f2booudmb07hnqb7vthi7d25dr3kc9nq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKbL4oasTLy7ct087oLGzYn6i3-_T9SiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748681804678-f2booudmb07hnqb7vthi7d25dr3kc9nq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
