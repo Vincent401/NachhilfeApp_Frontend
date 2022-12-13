@@ -6,6 +6,9 @@ class style{
   static const Color text = Color(0xFFCCC5B9);
   static const Color back = Color(0xFF252422);
   static const Color lightback = Color(0xFF403D39);
+  static const Color donegreen = Color(0xFF139A43);
+  static const Color outoftime = Color(0xFFF63E02);
+  static const Color shorttime = Color(0xFFFAA300);
 }
 
 TextStyle mystyle(double size, [ Color color = style.text, FontWeight fw = FontWeight.w700]){
