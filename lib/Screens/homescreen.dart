@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Screens/chatscreen.dart';
+import 'package:nachhilfe_app/Screens/profilescreen.dart';
 import 'package:nachhilfe_app/Screens/startscreen.dart';
 import 'package:nachhilfe_app/Screens/taskscreen.dart';
 import 'package:nachhilfe_app/help/variables.dart';
@@ -17,7 +18,8 @@ class _HomePageState extends State<HomePage> {
   List pageoptions = [
     const StartPage(),
     const ChatPage(),
-    const TaskPage()
+    const TaskPage(),
+    const ProfilePage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class _HomePageState extends State<HomePage> {
         unselectedLabelStyle: mystyle(17),
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
         currentIndex: page,
         onTap: (index){
           setState(() {
@@ -49,6 +52,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             label: (''),
             icon: Icon(Icons.task_alt_rounded, size: 32,),
+          ),
+          BottomNavigationBarItem(
+            label: (''),
+            icon: Icon(Icons.person_outline_rounded, size: 32,),
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../help/variables.dart';
+
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
 
@@ -11,6 +13,6 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
-    return const Text('Start screen');
+    return Center(child: Text('Start screen', style: mystyle(20),));
   }
 }
