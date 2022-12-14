@@ -17,8 +17,7 @@ class _TaskPageState extends State<TaskPage> {
     //return Center(child: Text('Task Page', style: mystyle(20),));
     return Scaffold(
       backgroundColor: style.back,
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height /15,),
@@ -49,11 +48,17 @@ class _TaskPageState extends State<TaskPage> {
               SingleTaskElement(
                 title: 'Mathe Aufgabe',
                 done: false,
-                date: DateTime(1,2,2000),
+                date: DateTime(2022,12,20),
                 solution: '2',
                 task: 'Rechne die Aufgabe 1 + 1',
               ),
-              //const SingleTaskElement(),
+              SingleTaskElement(
+                title: 'Mathe Aufgabe',
+                done: false,
+                date: DateTime(2022,12,15),
+                solution: '2',
+                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              ),
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
@@ -62,7 +67,6 @@ class _TaskPageState extends State<TaskPage> {
                 child: Text('Meine Aufgaben', style: mystyle(25),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /30,),
-              //const SingleTaskElement(),
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
@@ -74,14 +78,13 @@ class _TaskPageState extends State<TaskPage> {
               SingleTaskElement(
                 title: 'Latein Aufgabe',
                 done: true,
-                date: DateTime(2001),
-                solution: '2',
+                date: DateTime(2022, 12, 15),
+                solution: 'So immer den Tyrannen',
                 task: 'Übersetze \"sic semper tyranis\"',
               ),
             ],
           ),
         )
-      ),
     );
   }
 }
