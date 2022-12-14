@@ -4,6 +4,7 @@ import 'package:nachhilfe_app/Screens/chatscreen.dart';
 import 'package:nachhilfe_app/Screens/profilescreen.dart';
 import 'package:nachhilfe_app/Screens/startscreen.dart';
 import 'package:nachhilfe_app/Screens/taskscreen.dart';
+import 'package:nachhilfe_app/Task/assignmentpage.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   List pageoptions = [
     const StartPage(),
     const ChatPage(),
-    const TaskPage(),
+    //const TaskPage(),
+    const AssignmentPage(),
     const ProfilePage()
   ];
   @override
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             label: (''),
-            icon: Icon(Icons.task_alt_rounded, size: 32,),
+            icon: Icon(Icons.assignment, size: 32,),
           ),
           BottomNavigationBarItem(
             label: (''),
