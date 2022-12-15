@@ -38,9 +38,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height /15,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    margin: EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 175 ? 175 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
@@ -53,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       cursorColor: style.accent,
                       decoration: InputDecoration(
                           hintText: 'First Name',
-                          prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
+                          prefixIcon: const Icon(Icons.person_outline_rounded, color: style.accent,),
                           prefixStyle: mystyle(20, style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -77,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       cursorColor: style.accent,
                       decoration: InputDecoration(
                           hintText: 'Last Name',
-                          prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
+                          prefixIcon: const Icon(Icons.person_outline_rounded, color: style.accent,),
                           prefixStyle: mystyle(20, style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -173,9 +174,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height /40,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    margin: EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 116 ? 116 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
@@ -201,6 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 116 ? 116 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
@@ -298,6 +301,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.height /20,),
             ],
           ),
         ),

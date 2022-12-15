@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Screens/chatscreen.dart';
 import 'package:nachhilfe_app/Screens/profilescreen.dart';
 import 'package:nachhilfe_app/Screens/startscreen.dart';
-import 'package:nachhilfe_app/Screens/taskscreen.dart';
-import 'package:nachhilfe_app/Task/assignmentpage.dart';
+import 'package:nachhilfe_app/Task/taskscreen.dart';
+import 'package:nachhilfe_app/Screens/assignmentscreen.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 class HomePage extends StatefulWidget {

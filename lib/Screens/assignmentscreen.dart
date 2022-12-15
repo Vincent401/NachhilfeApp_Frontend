@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nachhilfe_app/Assignments/singleassignmentsmal.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
-import 'assignmentcreate.dart';
+import '../Assignments/assignmentcreate.dart';
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({Key? key}) : super(key: key);
@@ -43,6 +44,19 @@ class _AssignmentPageState extends State<AssignmentPage> {
               child: Text('Erstellte Assignments', style: mystyle(25),),
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
+
+            SingleAssignment(
+              title: 'Mathe Assignment',
+              done: false,
+              date: DateTime(2022,12,20),
+              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
+            ),
+            SingleAssignment(
+              title: 'Mathe Assignment',
+              done: false,
+              date: DateTime(2022,12,19),
+              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
+            ),
 
             SizedBox(height: MediaQuery.of(context).size.height /25,),
             Container(

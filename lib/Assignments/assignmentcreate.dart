@@ -75,6 +75,40 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 margin: EdgeInsets.only(left: 30),
                 child: Text(
+                  'Beschreibung',
+                  style: mystyle(20),),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height /100,),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width * 0.85,
+                //height: MediaQuery.of(context).size.height * 0.3,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  color: style.lightback,
+                ),
+                child: TextField(
+                  style: mystyle(18, style.text),
+                  cursorColor: style.accent,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                      hintText: 'Mathe Assignment zu....',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                      hintStyle: mystyle(20, Colors.grey,FontWeight.w300),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 2, color: style.accent),
+                        borderRadius: BorderRadius.circular(30),
+                      )
+                  ),
+                ),
+              ),
+
+              SizedBox(height: MediaQuery.of(context).size.height /25,),
+              Container(
+                alignment: Alignment.centerLeft,
+                width: MediaQuery.of(context).size.width * 0.85,
+                margin: EdgeInsets.only(left: 30),
+                child: Text(
                   'Schulfach',
                   style: mystyle(20),),
               ),
@@ -186,7 +220,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                         color: style.accent
                     ),
                     child: Center(
-                      child: Text('Aufgabe erstellen', style: mystyle(20, style.text),),
+                      child: Text('Assignment erstellen', style: mystyle(20, style.text),),
                     ),
                   ),
                 ),
