@@ -18,7 +18,7 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
@@ -29,7 +29,7 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                      child: const Icon(Icons.arrow_back_ios, size: 30, color: style.text,),
+                      child: const Icon(Icons.arrow_back_ios, size: 30, color: Style.text,),
                     onTap: (){
                       Navigator.pop(context);
                     },
@@ -53,15 +53,15 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(left: 20),
                 child: Text(
                   widget.task,
-                  style: mystyle(20, style.text, FontWeight.w300),),
+                  style: mystyle(20, Style.text, FontWeight.w300),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(left: 20),
                 child: Text(
                   'Lösung eingeben:',
                   style: mystyle(20),),
@@ -73,17 +73,17 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                 height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: style.lightback,
+                  color: Style.lightback,
                 ),
                 child: TextField(
-                  style: mystyle(18, style.text),
-                  cursorColor: style.accent,
+                  style: mystyle(18, Style.text),
+                  cursorColor: Style.accent,
                   maxLines: 10,
                   decoration: InputDecoration(
                       hintText: 'Lösung....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: style.accent),
+                        borderSide: const BorderSide(width: 2, color: Style.accent),
                         borderRadius: BorderRadius.circular(30),
                       )
                   ),
@@ -101,10 +101,10 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: style.accent
+                        color: Style.accent
                     ),
                     child: Center(
-                      child: Text('Lösung einreichen', style: mystyle(20, style.text),),
+                      child: Text('Lösung einreichen', style: mystyle(20, Style.text),),
                     ),
                   ),
                 ),

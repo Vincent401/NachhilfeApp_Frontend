@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/login/loginscreen.dart';
-import 'package:nachhilfe_app/login/signupscreen.dart';
+//import 'package:nachhilfe_app/login/signupscreen.dart';
 
 import 'Screens/homescreen.dart';
 import 'firebase_options.dart';

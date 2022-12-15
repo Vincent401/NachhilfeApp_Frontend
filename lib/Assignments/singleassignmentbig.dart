@@ -20,7 +20,7 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
@@ -31,7 +31,7 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    child: const Icon(Icons.arrow_back_ios, size: 30, color: style.text,),
+                    child: const Icon(Icons.arrow_back_ios, size: 30, color: Style.text,),
                     onTap: (){
                       Navigator.pop(context);
                     },
@@ -58,12 +58,12 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                 margin: const EdgeInsets.only(left: 20),
                 child: Text(
                   widget.description,
-                  style: mystyle(20, style.text, FontWeight.w300),),
+                  style: mystyle(20, Style.text, FontWeight.w300),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(left: 20),
                 child: Text(
                   'Tasks:',
                   style: mystyle(20),),
@@ -123,10 +123,10 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: style.accent
+                        color: Style.accent
                     ),
                     child: Center(
-                      child: Text('Neue Aufgabe erstellen', style: mystyle(20, style.text),),
+                      child: Text('Neue Aufgabe erstellen', style: mystyle(20, Style.text),),
                     ),
                   ),
                 ),

@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Screens/chatscreen.dart';
 import 'package:nachhilfe_app/Screens/profilescreen.dart';
 import 'package:nachhilfe_app/Screens/startscreen.dart';
-import 'package:nachhilfe_app/Task/taskscreen.dart';
+//import 'package:nachhilfe_app/Task/taskscreen.dart';
 import 'package:nachhilfe_app/Screens/assignmentscreen.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
@@ -26,12 +26,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: style.lightback,
-        selectedItemColor: style.accent,
+        backgroundColor: Style.lightback,
+        selectedItemColor: Style.accent,
         selectedLabelStyle: mystyle(17),
-        unselectedItemColor: style.text,
+        unselectedItemColor: Style.text,
         unselectedLabelStyle: mystyle(17),
         showSelectedLabels: false,
         showUnselectedLabels: false,

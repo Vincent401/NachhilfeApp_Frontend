@@ -15,7 +15,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -29,10 +29,10 @@ class _AssignmentPageState extends State<AssignmentPage> {
                   height: 60,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: style.accent
+                      color: Style.accent
                   ),
                   child: Center(
-                    child: Text('Neues Assignment erstellen', style: mystyle(20, style.text),),
+                    child: Text('Neues Assignment erstellen', style: mystyle(20, Style.text),),
                   ),
                 ),
               ),
