@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Task/singletasksmal.dart';
 import 'package:nachhilfe_app/Task/taskcreate.dart';
@@ -16,7 +16,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     //return Center(child: Text('Task Page', style: mystyle(20),));
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       body: SingleChildScrollView(
           child: Column(
             children: [
@@ -30,10 +30,10 @@ class _TaskPageState extends State<TaskPage> {
                           height: 60,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
-                              color: style.accent
+                              color: Style.accent
                           ),
                           child: Center(
-                            child: Text('Neue Aufgabe erstellen', style: mystyle(20, style.text),),
+                            child: Text('Neue Aufgabe erstellen', style: mystyle(20, Style.text),),
                           ),
                         ),
                       ),
@@ -80,7 +80,7 @@ class _TaskPageState extends State<TaskPage> {
                 done: true,
                 date: DateTime(2022, 12, 15),
                 solution: 'So immer den Tyrannen',
-                task: 'Übersetze \"sic semper tyranis\"',
+                task: 'Übersetze "sic semper tyranis"',
               ),
             ],
           ),

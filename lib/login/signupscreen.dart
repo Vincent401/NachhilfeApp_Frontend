@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-import 'package:nachhilfe_app/login/loginscreen.dart';
+//import 'package:nachhilfe_app/login/loginscreen.dart';
 
 import '../main.dart';
 
@@ -25,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: style.back,
+      backgroundColor: Style.back,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -34,31 +34,32 @@ class _SignUpPageState extends State<SignUpPage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
-                child: Text('Sign up', style: mystyle(50, style.text),),
+                child: Text('Sign up', style: mystyle(50, Style.text),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /15,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    margin: const EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 175 ? 175 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: style.lightback,
+                      color: Style.lightback,
                     ),
                     child: TextField(
-                      style: mystyle(18, style.text),
+                      style: mystyle(18, Style.text),
                       controller: firstnamecontroller,
-                      cursorColor: style.accent,
+                      cursorColor: Style.accent,
                       decoration: InputDecoration(
                           hintText: 'First Name',
-                          prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                          prefixStyle: mystyle(20, style.accent),
+                          prefixIcon: const Icon(Icons.person_outline_rounded, color: Style.accent,),
+                          prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: style.accent),
+                            borderSide: const BorderSide(width: 2, color: Style.accent),
                             borderRadius: BorderRadius.circular(30),
                           )
                       ),
@@ -69,20 +70,20 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: MediaQuery.of(context).size.width > 175 ? 175 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: style.lightback,
+                      color: Style.lightback,
                     ),
                     child: TextField(
-                      style: mystyle(18, style.text),
+                      style: mystyle(18, Style.text),
                       controller: lastnamecontroller,
-                      cursorColor: style.accent,
+                      cursorColor: Style.accent,
                       decoration: InputDecoration(
                           hintText: 'Last Name',
-                          prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                          prefixStyle: mystyle(20, style.accent),
+                          prefixIcon: const Icon(Icons.person_outline_rounded, color: Style.accent,),
+                          prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: style.accent),
+                            borderSide: const BorderSide(width: 2, color: Style.accent),
                             borderRadius: BorderRadius.circular(30),
                           )
                       ),
@@ -96,20 +97,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: MediaQuery.of(context).size.width > 350 ? 350 : MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: style.lightback,
+                  color: Style.lightback,
                 ),
                 child: TextField(
-                  style: mystyle(18, style.text),
+                  style: mystyle(18, Style.text),
                   controller: emailcontroller,
-                  cursorColor: style.accent,
+                  cursorColor: Style.accent,
                   decoration: InputDecoration(
                       hintText: 'Email',
-                      prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                      prefixStyle: mystyle(20, style.accent),
+                      prefixIcon: const Icon(Icons.mail_outline_outlined, color: Style.accent,),
+                      prefixStyle: mystyle(20, Style.accent),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: style.accent),
+                        borderSide: const BorderSide(width: 2, color: Style.accent),
                         borderRadius: BorderRadius.circular(30),
                       )
                   ),
@@ -121,20 +122,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: MediaQuery.of(context).size.width > 350 ? 350 : MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: style.lightback,
+                  color: Style.lightback,
                 ),
                 child: TextField(
-                  style: mystyle(18, style.text),
+                  style: mystyle(18, Style.text),
                   controller: passwordcontroller,
                   obscureText: true,
-                  cursorColor: style.accent,
+                  cursorColor: Style.accent,
                   decoration: InputDecoration(
                       hintText: 'Password',
-                      prefixIcon: const Icon(Icons.lock_outline, color: style.accent,),
+                      prefixIcon: const Icon(Icons.lock_outline, color: Style.accent,),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: style.accent),
+                        borderSide: const BorderSide(width: 2, color: Style.accent),
                         borderRadius: BorderRadius.circular(30),
                       )
                   ),
@@ -146,20 +147,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: MediaQuery.of(context).size.width > 350 ? 350 : MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: style.lightback,
+                  color: Style.lightback,
                 ),
                 child: TextField(
-                  style: mystyle(18, style.text),
+                  style: mystyle(18, Style.text),
                   controller: confirmpasswordcontroller,
                   obscureText: true,
-                  cursorColor: style.accent,
+                  cursorColor: Style.accent,
                   decoration: InputDecoration(
                       hintText: 'Confirm Password',
-                      prefixIcon: const Icon(Icons.lock_outline, color: style.accent,),
+                      prefixIcon: const Icon(Icons.lock_outline, color: Style.accent,),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: style.accent),
+                        borderSide: const BorderSide(width: 2, color: Style.accent),
                         borderRadius: BorderRadius.circular(30),
                       )
                   ),
@@ -173,53 +174,55 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height /40,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    margin: const EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 116 ? 116 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: style.lightback,
+                      color: Style.lightback,
                     ),
                     child: TextField(
-                      style: mystyle(18, style.text),
+                      style: mystyle(18, Style.text),
                       controller: daycontroller,
-                      cursorColor: style.accent,
+                      cursorColor: Style.accent,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Day',
                           //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                          prefixStyle: mystyle(20, style.accent),
+                          prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: style.accent),
+                            borderSide: const BorderSide(width: 2, color: Style.accent),
                             borderRadius: BorderRadius.circular(30),
                           )
                       ),
                     ),
                   ),
                   Container(
+                    margin: const EdgeInsets.only(right: 10),
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width > 116 ? 116 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: style.lightback,
+                      color: Style.lightback,
                     ),
                     child: TextField(
-                      style: mystyle(18, style.text),
+                      style: mystyle(18, Style.text),
                       controller: monthcontroller,
-                      cursorColor: style.accent,
+                      cursorColor: Style.accent,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Month',
                           //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                          prefixStyle: mystyle(20, style.accent),
+                          prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: style.accent),
+                            borderSide: const BorderSide(width: 2, color: Style.accent),
                             borderRadius: BorderRadius.circular(30),
                           )
                       ),
@@ -230,21 +233,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: MediaQuery.of(context).size.width > 116 ? 116 : MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: style.lightback,
+                      color: Style.lightback,
                     ),
                     child: TextField(
-                      style: mystyle(18, style.text),
+                      style: mystyle(18, Style.text),
                       controller: yearcontroller,
-                      cursorColor: style.accent,
+                      cursorColor: Style.accent,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Year',
                           //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
-                          prefixStyle: mystyle(20, style.accent),
+                          prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: style.accent),
+                            borderSide: const BorderSide(width: 2, color: Style.accent),
                             borderRadius: BorderRadius.circular(30),
                           )
                       ),
@@ -280,24 +283,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 60,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: style.accent
+                      color: Style.accent
                   ),
                   child: Center(
-                    child: Text('SIGN UP', style: mystyle(25, style.text),),
+                    child: Text('SIGN UP', style: mystyle(25, Style.text),),
                   ),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /20,),
               InkWell(
                 onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavigationPage())),
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width > 200 ? 200 : MediaQuery.of(context).size.width,
                   height: 60,
                   child: Center(
-                    child: Text('Already have an account? \n Sign in', style: mystyle(15, style.text), textAlign: TextAlign.center,),
+                    child: Text('Already have an account? \n Sign in', style: mystyle(15, Style.text), textAlign: TextAlign.center,),
                   ),
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.height /20,),
             ],
           ),
         ),

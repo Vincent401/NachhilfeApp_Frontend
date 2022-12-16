@@ -20,14 +20,14 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
   Color dateColor(){
     DateTime today = DateTime.now();
     if(widget.done == true){
-      return style.donegreen;
+      return Style.donegreen;
     }
     if(widget.date.isBefore(today)){
-      return style.outoftime;
+      return Style.outoftime;
     }else if(widget.date.difference(today).inDays < 3){
-      return style.shorttime;
+      return Style.shorttime;
     }else{
-      return style.donegreen;
+      return Style.donegreen;
     }
   }
 
@@ -43,11 +43,11 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.task_alt_outlined, color: widget.done == true ? style.donegreen : style.text, size: 30,),
+                Icon(Icons.task_alt_outlined, color: widget.done == true ? Style.donegreen : Style.text, size: 30,),
                 Column(
                   children: [
-                    Text(widget.title, style: mystyle(20, style.text)),
-                    Text('${widget.task.substring(0, 20)}...', style: mystyle(15, style.text, FontWeight.w400)),
+                    Text(widget.title, style: mystyle(20, Style.text)),
+                    Text('${widget.task.substring(0, 20)}...', style: mystyle(15, Style.text, FontWeight.w400)),
                   ],
                 ),
                 Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
@@ -56,7 +56,7 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
             const Divider(
               height: 30,
               thickness: 1,
-              color: style.text,
+              color: Style.text,
             ),
           ],
         )

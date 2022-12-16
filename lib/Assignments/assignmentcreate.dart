@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
-class TaskCreatePage extends StatefulWidget {
-  const TaskCreatePage({Key? key}) : super(key: key);
+class AssignmentCreatePage extends StatefulWidget {
+  const AssignmentCreatePage({Key? key}) : super(key: key);
 
   @override
-  State<TaskCreatePage> createState() => _TaskCreatePageState();
+  State<AssignmentCreatePage> createState() => _AssignmentCreatePageState();
 }
 
-class _TaskCreatePageState extends State<TaskCreatePage> {
+class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                   ),
                   Container(
                       alignment: Alignment.center,
-                      child: Text('Neue Aufgabe erstellen', style: mystyle(25),)
+                      child: Text('Neues Assignment erstellen', style: mystyle(23),)
                   ),
                   const Icon(null)
                 ],
@@ -58,7 +59,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                   cursorColor: Style.accent,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      hintText: 'Mathe Aufgabe....',
+                      hintText: 'Mathe Assignment....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w300),
                       focusedBorder: OutlineInputBorder(
@@ -75,7 +76,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(left: 30),
                 child: Text(
-                  'Aufgaben Text',
+                  'Beschreibung',
                   style: mystyle(20),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /100,),
@@ -92,7 +93,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                   cursorColor: Style.accent,
                   maxLines: 5,
                   decoration: InputDecoration(
-                      hintText: 'Rechne 1 + 1....',
+                      hintText: 'Mathe Assignment zu....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w300),
                       focusedBorder: OutlineInputBorder(
@@ -109,7 +110,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(left: 30),
                 child: Text(
-                  'Lösungs Text',
+                  'Schulfach',
                   style: mystyle(20),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /100,),
@@ -124,9 +125,9 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                 child: TextField(
                   style: mystyle(18, Style.text),
                   cursorColor: Style.accent,
-                  maxLines: 5,
+                  maxLines: 1,
                   decoration: InputDecoration(
-                      hintText: 'Lösung ist 2....',
+                      hintText: 'Mathe....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                       hintStyle: mystyle(20, Colors.grey,FontWeight.w300),
                       focusedBorder: OutlineInputBorder(
@@ -220,7 +221,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                         color: Style.accent
                     ),
                     child: Center(
-                      child: Text('Aufgabe erstellen', style: mystyle(20, Style.text),),
+                      child: Text('Assignment erstellen', style: mystyle(20, Style.text),),
                     ),
                   ),
                 ),
