@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Assignments/singleassignmentsmal.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 import '../Assignments/assignmentcreate.dart';
+import '../Elemente/_assignments.dart';
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({Key? key}) : super(key: key);
@@ -11,7 +15,25 @@ class AssignmentPage extends StatefulWidget {
   State<AssignmentPage> createState() => _AssignmentPageState();
 }
 
+List<Assignment> parseAssignment(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Assignment>((json) =>Assignment.fromMap(json)).toList();
+}
+Future<List<Assignment>> fetchAssignment() async {
+  var url = Uri.parse('http://localhost:8080/api/v1/assignments/byOwner/{ownerID}');
+  final response = await http.get(url);
+  if (response.statusCode == 200) {
+    return parseAssignment(response.body);
+  } else {
+    throw Exception('Unable to fetch products from the REST API');
+  }
+}
+
 class _AssignmentPageState extends State<AssignmentPage> {
+
+  final Future<List<Assignment>> assignments = fetchAssignment();
+  final List<Assignment> ass = [Assignment('001', '001', 'Mathe', 'Mathe Aufgabe', 'test'),];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +66,18 @@ class _AssignmentPageState extends State<AssignmentPage> {
               child: Text('Erstellte Assignments', style: mystyle(25),),
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
+            
+            /*List.generate(ass.length, (index), growable: true{
+              SingleAssignment(
+              title: ass[index].name,
+              done: false,
+              date: DateTime(2022,12,20),
+              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
+              ),
+            }),*/
 
+            //ListView.builder(),
+            
             SingleAssignment(
               title: 'Mathe Assignment',
               done: false,
