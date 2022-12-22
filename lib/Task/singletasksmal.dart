@@ -47,7 +47,7 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                 Column(
                   children: [
                     Text(widget.title, style: mystyle(20, Style.text)),
-                    Text('${widget.task.substring(0, 20)}...', style: mystyle(15, Style.text, FontWeight.w400)),
+                    Text('${widget.task.characters.take(20).toString()}...', style: mystyle(15, Style.text, FontWeight.w400)),
                   ],
                 ),
                 Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),

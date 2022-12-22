@@ -3,12 +3,14 @@ import 'package:nachhilfe_app/Assignments/singleassignmentbig.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 class SingleAssignment extends StatefulWidget {
-  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description}) : super(key: key);
+  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description, required this.assignmentID, required this.owner}) : super(key: key);
 
   final bool done;
   final DateTime date;
   final String title;
   final String description;
+  final String assignmentID;
+  final String owner;
 
   @override
   State<SingleAssignment> createState() => _SingleAssignmentState();
@@ -33,7 +35,7 @@ class _SingleAssignmentState extends State<SingleAssignment> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleAssignmentBig(date: widget.date, description: widget.description, title: widget.title,color: dateColor(),))),
+      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleAssignmentBig(description: widget.description, title: widget.title,color: dateColor(), assignmentID: widget.assignmentID, owner: widget.owner,))),
       child: Container(
           alignment: Alignment.center,
           margin: const EdgeInsets.only(left: 20, right: 20),
@@ -46,7 +48,7 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                   Column(
                     children: [
                       Text(widget.title, style: mystyle(20, Style.text)),
-                      Text('${widget.description.substring(0, 20)}...', style: mystyle(15, Style.text, FontWeight.w400)),
+                      Text(widget.description.characters.take(20).toString(), style: mystyle(15, Style.text, FontWeight.w400)), //'${widget.description.substring(0, 20)}...'
                     ],
                   ),
                   Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),

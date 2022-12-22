@@ -1,6 +1,22 @@
+import 'dart:convert';
+
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nachhilfe_app/Elemente/_assignments.dart';
+import 'package:nachhilfe_app/Screens/homescreen.dart';
+//import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/help/variables.dart';
+
+import 'package:http/http.dart' as http;
+
+import '../help/calls.dart';
+//import 'package:nachhilfe_app/main.dart';
+
+TextEditingController titelcontroller = TextEditingController();
+TextEditingController descrcontrooller = TextEditingController();
+TextEditingController subjectcontroller = TextEditingController();
 
 class AssignmentCreatePage extends StatefulWidget {
   const AssignmentCreatePage({Key? key}) : super(key: key);
@@ -9,7 +25,30 @@ class AssignmentCreatePage extends StatefulWidget {
   State<AssignmentCreatePage> createState() => _AssignmentCreatePageState();
 }
 
+void postAssignment() async {
+
+  DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
+
+  var url = Uri.parse('http://localhost:8080/api/v1/assignments/add');
+  Map<String, dynamic> body = {
+    "owner": userdoc['id'],
+    "subject": "8882b447-6fe0-48fa-894d-20a9d9c4d6af",
+    "name": titelcontroller.text.toString(),
+    "description": descrcontrooller.text.toString()
+  }; //titelcontroller.text.toString(), descrcontrooller.text.toString() //"deleted": "false"
+  Map<String, String> header = <String, String>{
+    'Content-Type': 'application/json'
+  };
+  final response = await http.post(url, body: jsonEncode(body), headers: header); //, headers: header
+  if (response.statusCode == 200) {
+    //print('Good');
+  } else {
+    throw Exception('Unable to fetch products from the REST API');
+  }
+}
+
 class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +96,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                 child: TextField(
                   style: mystyle(18, Style.text),
                   cursorColor: Style.accent,
+                  controller: titelcontroller,
                   maxLines: 1,
                   decoration: InputDecoration(
                       hintText: 'Mathe Assignment....',
@@ -92,6 +132,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                   style: mystyle(18, Style.text),
                   cursorColor: Style.accent,
                   maxLines: 5,
+                  controller: descrcontrooller,
                   decoration: InputDecoration(
                       hintText: 'Mathe Assignment zu....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -126,6 +167,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                   style: mystyle(18, Style.text),
                   cursorColor: Style.accent,
                   maxLines: 1,
+                  controller: subjectcontroller,
                   decoration: InputDecoration(
                       hintText: 'Mathe....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -139,7 +181,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
               ),
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
-              Container(
+              /*Container(
                 alignment: Alignment.centerLeft,
                 width: MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(left: 30),
@@ -204,14 +246,15 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                       )
                   ),
                 ),
-              ),
+              ),*/
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: (){
-                    Navigator.pop(context);
+                    postAssignment();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250 ? 250 : MediaQuery.of(context).size.width,

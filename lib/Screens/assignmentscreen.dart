@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -20,9 +22,13 @@ List<Assignment> parseAssignment(String responseBody) {
   return parsed.map<Assignment>((json) =>Assignment.fromMap(json)).toList();
 }
 Future<List<Assignment>> fetchAssignment() async {
-  var url = Uri.parse('http://localhost:8080/api/v1/assignments/byOwner/{ownerID}');
+
+  DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
+
+  var url = Uri.parse('http://localhost:8080/api/v1/assignments/byOwner/${userdoc['id']}'); ///byOwner/{ownerID};
   final response = await http.get(url);
   if (response.statusCode == 200) {
+    //print(parseAssignment(response.body)[0].description);
     return parseAssignment(response.body);
   } else {
     throw Exception('Unable to fetch products from the REST API');
@@ -31,8 +37,7 @@ Future<List<Assignment>> fetchAssignment() async {
 
 class _AssignmentPageState extends State<AssignmentPage> {
 
-  final Future<List<Assignment>> assignments = fetchAssignment();
-  final List<Assignment> ass = [Assignment('001', '001', 'Mathe', 'Mathe Aufgabe', 'test'),];
+  //final Future<List<Assignment>> assignments = fetchAssignment();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +46,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             SizedBox(height: MediaQuery.of(context).size.height /15,),
             Container(
               alignment: Alignment.center,
@@ -66,7 +72,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
               child: Text('Erstellte Assignments', style: mystyle(25),),
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
-            
+
             /*List.generate(ass.length, (index), growable: true{
               SingleAssignment(
               title: ass[index].name,
@@ -75,20 +81,47 @@ class _AssignmentPageState extends State<AssignmentPage> {
               description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
               ),
             }),*/
-
             //ListView.builder(),
-            
-            SingleAssignment(
+            /*SingleAssignment(
               title: 'Mathe Assignment',
               done: false,
               date: DateTime(2022,12,20),
               description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
-            ),
-            SingleAssignment(
-              title: 'Mathe Assignment',
-              done: false,
-              date: DateTime(2022,12,19),
-              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
+            ),*/
+
+            FutureBuilder<List<Assignment>>(
+                future: fetchAssignment(),
+                builder: (context, future){
+                  if(!future.hasData) {
+                    return Container();
+                  } else {
+                    List<Assignment>? list = future.data;
+                    //print(future.data?.length);
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        //scrollDirection: Axis.horizontal,
+                        itemCount: list!.length, // < 6 ? list?.length : 5,
+                        itemBuilder: (context, index){
+                          return SingleAssignment(
+                            title: list[index].name,
+                            done: false,
+                            date: DateTime(2022,12,20),
+                            description: list[index].description,
+                            assignmentID: list[index].id,
+                            owner: list[index].owner,
+                          );
+                            /*Container(
+                            child: SingleAssignment(
+                              title: list![index].name,
+                              done: false,
+                              date: DateTime(2022,12,20),
+                              description: list[index].description,
+                            ),
+                          );*/
+                        }
+                    );
+                  }
+                }
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height /25,),
