@@ -50,7 +50,13 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                     Text('${widget.task.characters.take(20).toString()}...', style: mystyle(15, Style.text, FontWeight.w400)),
                   ],
                 ),
-                Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+                    const Icon(Icons.settings, color: Style.text, size: 40,)
+                  ],
+                )
               ],
             ),
             const Divider(

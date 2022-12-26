@@ -111,6 +111,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             assignmentID: list[index].id,
                             owner: list[index].owner,
                             subject: list[index].owner,
+                            assignment: list[index],
                           );
                             /*Container(
                             child: SingleAssignment(
