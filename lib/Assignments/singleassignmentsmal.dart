@@ -3,7 +3,7 @@ import 'package:nachhilfe_app/Assignments/singleassignmentbig.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 class SingleAssignment extends StatefulWidget {
-  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description, required this.assignmentID, required this.owner}) : super(key: key);
+  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description, required this.assignmentID, required this.owner, required this.subject}) : super(key: key);
 
   final bool done;
   final DateTime date;
@@ -11,6 +11,7 @@ class SingleAssignment extends StatefulWidget {
   final String description;
   final String assignmentID;
   final String owner;
+  final String subject;
 
   @override
   State<SingleAssignment> createState() => _SingleAssignmentState();

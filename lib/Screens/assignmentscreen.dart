@@ -9,6 +9,7 @@ import 'package:nachhilfe_app/help/variables.dart';
 
 import '../Assignments/assignmentcreate.dart';
 import '../Elemente/_assignments.dart';
+import '../help/calls/subjectcalls.dart';
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({Key? key}) : super(key: key);
@@ -109,6 +110,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             description: list[index].description,
                             assignmentID: list[index].id,
                             owner: list[index].owner,
+                            subject: list[index].owner,
                           );
                             /*Container(
                             child: SingleAssignment(
