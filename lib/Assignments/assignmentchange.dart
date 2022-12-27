@@ -1,13 +1,7 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/fix_data.yaml';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
 
 import '../Elemente/_subjects.dart';
-import '../Screens/homescreen.dart';
 import '../help/calls/subjectcalls.dart';
 import '../help/variables.dart';
 
@@ -26,16 +20,15 @@ class AssignmentChangePage extends StatefulWidget {
   State<AssignmentChangePage> createState() => _AssignmentChangePageState();
 }
 
-/*void putAssignment() async {
-  var url = Uri.parse('http://localhost:8080/api/v1/assignments/update/?name=${titelcontroller.text}');//${assignment.id}
-
+void putAssignment(Assignment assignment, Subjects subjects) async {
+  var url = Uri.parse('http://localhost:8080/api/v1/assignments/update/${assignment.id}?name=${titelcontroller.text}&description=${descrcontrooller.text}&subjectId=${subjects.id}');
   final response = await http.put(url); //, headers: header
   if (response.statusCode == 200) {
     //print('Good');
   } else {
     throw Exception('Unable to fetch products from the REST API');
   }
-}*/
+}
 
 class _AssignmentChangePageState extends State<AssignmentChangePage> {
 
@@ -46,6 +39,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
   Widget build(BuildContext context) {
     titelcontroller.text = widget.currAssignment.name;
     descrcontrooller.text = widget.currAssignment.description;
+    currSub;
     return Scaffold(
       backgroundColor: Style.back,
       body: SingleChildScrollView(
@@ -233,13 +227,13 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: () {
-                    //putAssignment();
-                    //Navigator.pop(context);
-                    Navigator.push(
+                    putAssignment(widget.currAssignment, currSub!);
+                    Navigator.pop(context);
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const HomePage(),
-                        ));
+                        ));*/
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250
