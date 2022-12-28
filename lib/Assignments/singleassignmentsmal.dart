@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Assignments/singleassignmentbig.dart';
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
@@ -60,10 +62,33 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
-                      InkWell(
-                        onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
-                        child: const Icon(Icons.settings, color: Style.text, size: 40,),
-                      )
+                      FutureBuilder<DocumentSnapshot<Object?>>(
+                          future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
+                          builder: (context, future){
+                            if(!future.hasData) {
+                              return Container();
+                            } else {
+                              DocumentSnapshot<Object?>? list = future.data;
+                              //print(future.data?.length);
+                              return Container(
+                                  child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
+                                  InkWell(
+                                    onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
+                                    child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                                  ) :
+                                  Container()
+                              );
+                            }
+                          }
+                      ),
+                      /*Container(
+                        child: widget.assignment.owner.compareTo(other)==0 ?
+                        InkWell(
+                          onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
+                          child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                        ) :
+                            Container()
+                      )*/
                     ],
                   )
                 ],

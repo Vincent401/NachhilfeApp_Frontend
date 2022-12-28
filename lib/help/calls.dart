@@ -42,7 +42,7 @@ Future<List<Assignment>> fetchAssignmentAssID(String assignmentID) async {
   var url = Uri.parse('http://localhost:8080/api/v1/assignments/byId/$assignmentID'); ///byOwner/{ownerID}
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    print(parseAssignment(response.body)[0].owner);
+    //print(parseAssignment(response.body)[0].owner);
     return parseAssignment(response.body);
   } else {
     throw Exception('Unable to fetch products from the REST API');
@@ -62,11 +62,11 @@ Future<List<Member>> fetchMember() async {
 
   DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
 
-  print(userdoc['email']);
+  //print(userdoc['email']);
   var url = Uri.parse('http://localhost:8080/api/v1/user/byId/${userdoc['id']}');
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    print(parseMember(response.body)[0].offersHelp);
+    //print(parseMember(response.body)[0].offersHelp);
     return parseMember(response.body);
   } else {
     throw Exception('Unable to fetch products from the REST API');

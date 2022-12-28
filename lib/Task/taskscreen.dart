@@ -1,6 +1,6 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nachhilfe_app/Task/singletasksmal.dart';
+//import 'package:nachhilfe_app/Task/singletasksmal.dart';
 //import 'package:nachhilfe_app/Task/taskcreate.dart';
 import '../help/variables.dart';
 
@@ -45,20 +45,20 @@ class _TaskPageState extends State<TaskPage> {
                 child: Text('Erstellte Aufgaben', style: mystyle(25),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /30,),
-              SingleTaskElement(
+              /*SingleTaskElement(
                 title: 'Mathe Aufgabe',
                 done: false,
                 date: DateTime(2022,12,20),
                 solution: '2',
-                task: 'Rechne die Aufgabe 1 + 1',
-              ),
-              SingleTaskElement(
+                taskName: 'Rechne die Aufgabe 1 + 1',
+              ),*/
+              /*SingleTaskElement(
                 title: 'Mathe Aufgabe',
                 done: false,
                 date: DateTime(2022,12,15),
                 solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),
+                taskName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              ),*/
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
@@ -75,13 +75,13 @@ class _TaskPageState extends State<TaskPage> {
                 child: Text('Erledigte Aufgaben', style: mystyle(25),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /30,),
-              SingleTaskElement(
+              /*SingleTaskElement(
                 title: 'Latein Aufgabe',
                 done: true,
                 date: DateTime(2022, 12, 15),
                 solution: 'So immer den Tyrannen',
-                task: 'Übersetze "sic semper tyranis"',
-              ),
+                taskName: 'Übersetze "sic semper tyranis"',
+              ),*/
             ],
           ),
         )

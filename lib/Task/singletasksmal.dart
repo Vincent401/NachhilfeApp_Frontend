@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+//import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Task/singletaskbig.dart';
+import 'package:nachhilfe_app/Task/taskchange.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
+import '../Elemente/_task.dart';
+
 class SingleTaskElement extends StatefulWidget {
-  const SingleTaskElement({Key? key, required this.done,required this.date, required this.title, required this.task, required this.solution}) : super(key: key);
+  const SingleTaskElement({Key? key, required this.done,required this.date, required this.title, required this.taskName, required this.solution, required this.task}) : super(key: key);
 
   final bool done;
   final DateTime date;
   final String title;
-  final String task;
+  final String taskName;
   final String solution;
+  final Task task;
 
   @override
   State<SingleTaskElement> createState() => _SingleTaskElementState();
@@ -34,7 +39,7 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleTaskBig(date: widget.date, solution: widget.solution, task: widget.task, title: widget.title,color: dateColor(),))),
+      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleTaskBig(date: widget.date, solution: widget.solution, task: widget.taskName, title: widget.title,color: dateColor(),))),
       child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(left: 20, right: 20),
@@ -47,14 +52,17 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                 Column(
                   children: [
                     Text(widget.title, style: mystyle(20, Style.text)),
-                    Text('${widget.task.characters.take(20).toString()}...', style: mystyle(15, Style.text, FontWeight.w400)),
+                    Text('${widget.taskName.characters.take(20).toString()}...', style: mystyle(15, Style.text, FontWeight.w400)),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
-                    const Icon(Icons.settings, color: Style.text, size: 40,)
+                    InkWell(
+                      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => TaskChangePage(currTask: widget.task))),//currAssignment: widget.assignment,
+                      child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                    )
                   ],
                 )
               ],

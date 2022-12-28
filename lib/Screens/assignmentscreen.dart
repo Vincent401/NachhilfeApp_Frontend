@@ -9,7 +9,8 @@ import 'package:nachhilfe_app/help/variables.dart';
 
 import '../Assignments/assignmentcreate.dart';
 import '../Elemente/_assignments.dart';
-import '../help/calls/subjectcalls.dart';
+//import '../help/calls/subjectcalls.dart';
+import '../help/calls/workload.dart';
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({Key? key}) : super(key: key);
@@ -134,6 +135,36 @@ class _AssignmentPageState extends State<AssignmentPage> {
               child: Text('Meine Assignments', style: mystyle(25),),
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
+
+            //fetchWorkloadBySchoolerId()
+            FutureBuilder<List<Assignment>>(
+                future: fetchWorkloadBySchoolerId(),
+                builder: (context, future){
+                  if(!future.hasData) {
+                    return Container();
+                  } else {
+                    List<Assignment>? list = future.data;
+                    //print(future.data?.length);
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        //scrollDirection: Axis.horizontal,
+                        itemCount: list!.length, // < 6 ? list?.length : 5,
+                        itemBuilder: (context, index){
+                          return SingleAssignment(
+                            title: list[index].name,
+                            done: false,
+                            date: DateTime(2022,12,20),
+                            description: list[index].description,
+                            assignmentID: list[index].id,
+                            owner: list[index].owner,
+                            subject: list[index].owner,
+                            assignment: list[index],
+                          );
+                        }
+                    );
+                  }
+                }
+            ),
 
             SizedBox(height: MediaQuery.of(context).size.height /25,),
             Container(

@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_task.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
-import '../Elemente/_assignments.dart';
+//import '../Elemente/_assignments.dart';
 import '../Task/singletasksmal.dart';
 import '../Task/taskcreate.dart';
-import '../help/calls.dart';
+//import '../help/calls.dart';
 
 class SingleAssignmentBig extends StatefulWidget {
   const SingleAssignmentBig({Key? key, required this.title, required this.description, required this.color, required this.assignmentID, required this.owner}) : super(key: key);
@@ -28,8 +28,8 @@ class SingleAssignmentBig extends StatefulWidget {
 
 Future<String> getOwner() async {
   DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
-  print(userdoc['id']);
-  print(userdoc['email']);
+  //print(userdoc['id']);
+  //print(userdoc['email']);
   return userdoc['id'];
 }
 
@@ -163,7 +163,8 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                               done: false,
                               date: DateTime.now(),
                               solution: list[index].correctSolution,
-                              task: list[index].name,
+                              taskName: list[index].name,
+                              task: list[index],
                             );
                           }
                       );

@@ -201,7 +201,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                                   dropdownValue = value;
                                   subjectcontroller.text = value!.id;
                                   currSub = value;
-                                  print(value.name);
+                                  //print(value.name);
                                 });
                               },
                               items: list?.map<DropdownMenuItem<Subjects>>((Subjects value) {

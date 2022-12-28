@@ -57,7 +57,7 @@ void postAssignment() async {
 class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
 
   final Future<List<Subjects>> subjects = fetchSubjectAll();
-  Subjects? currSub = null;
+  Subjects? currSub;
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +247,7 @@ class _AssignmentCreatePageState extends State<AssignmentCreatePage> {
                                     dropdownValue = value;
                                     subjectcontroller.text = value!.id;
                                     currSub = value;
-                                    print(value.name);
+                                    //print(value.name);
                                   });
                                 },
                                 items: list?.map<DropdownMenuItem<Subjects>>((Subjects value) {
