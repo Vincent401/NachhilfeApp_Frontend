@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 //import 'package:nachhilfe_app/login/loginscreen.dart';
 
+import '../help/calls/membercalls.dart';
 import '../main.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -274,6 +275,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }),
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavigationPage())),
                     });
+                    postMember('${firstnamecontroller.text} ${lastnamecontroller.text}', true, true);
                   }catch (e){
                     //print(e);
                   }
