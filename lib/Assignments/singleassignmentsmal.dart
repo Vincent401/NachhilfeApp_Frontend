@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Assignments/singleassignmentbig.dart';
+import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
+import 'assignmentchange.dart';
+
 class SingleAssignment extends StatefulWidget {
-  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description, required this.assignmentID, required this.owner, required this.subject}) : super(key: key);
+  const SingleAssignment({Key? key, required this.done,required this.date, required this.title, required this.description, required this.assignmentID, required this.owner, required this.subject, required this.assignment}) : super(key: key);
 
   final bool done;
   final DateTime date;
@@ -12,6 +15,7 @@ class SingleAssignment extends StatefulWidget {
   final String assignmentID;
   final String owner;
   final String subject;
+  final Assignment assignment;
 
   @override
   State<SingleAssignment> createState() => _SingleAssignmentState();
@@ -49,10 +53,19 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                   Column(
                     children: [
                       Text(widget.title, style: mystyle(20, Style.text)),
-                      Text(widget.description.characters.take(20).toString(), style: mystyle(15, Style.text, FontWeight.w400)), //'${widget.description.substring(0, 20)}...'
+                      Text('${widget.description.characters.take(20)}...', style: mystyle(15, Style.text, FontWeight.w400)), //'${widget.description.substring(0, 20)}...'
                     ],
                   ),
-                  Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+                      InkWell(
+                        onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
+                        child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                      )
+                    ],
+                  )
                 ],
               ),
               const Divider(
