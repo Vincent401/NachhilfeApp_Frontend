@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nachhilfe_app/Elemente/_assignments.dart';
 //import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Task/singletaskbig.dart';
 import 'package:nachhilfe_app/Task/taskchange.dart';
@@ -7,7 +10,7 @@ import 'package:nachhilfe_app/help/variables.dart';
 import '../Elemente/_task.dart';
 
 class SingleTaskElement extends StatefulWidget {
-  const SingleTaskElement({Key? key, required this.done,required this.date, required this.title, required this.taskName, required this.solution, required this.task}) : super(key: key);
+  const SingleTaskElement({Key? key, required this.done,required this.date, required this.title, required this.taskName, required this.solution, required this.task, required this.assignment}) : super(key: key);
 
   final bool done;
   final DateTime date;
@@ -15,6 +18,7 @@ class SingleTaskElement extends StatefulWidget {
   final String taskName;
   final String solution;
   final Task task;
+  final Assignment assignment;
 
   @override
   State<SingleTaskElement> createState() => _SingleTaskElementState();
@@ -59,10 +63,25 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
-                    InkWell(
-                      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => TaskChangePage(currTask: widget.task))),//currAssignment: widget.assignment,
-                      child: const Icon(Icons.settings, color: Style.text, size: 40,),
-                    )
+                    FutureBuilder<DocumentSnapshot<Object?>>(
+                        future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
+                        builder: (context, future){
+                          if(!future.hasData) {
+                            return Container();
+                          } else {
+                            DocumentSnapshot<Object?>? list = future.data;
+                            //print(future.data?.length);
+                            return Container(
+                                child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
+                                InkWell(
+                                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => TaskChangePage(currTask: widget.task))),//currAssignment: widget.assignment,
+                                  child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                                ) :
+                                Container()
+                            );
+                          }
+                        }
+                    ),
                   ],
                 )
               ],

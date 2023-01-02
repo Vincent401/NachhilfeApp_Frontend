@@ -42,7 +42,7 @@ class _SingleAssignmentState extends State<SingleAssignment> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleAssignmentBig(description: widget.description, title: widget.title,color: dateColor(), assignmentID: widget.assignmentID, owner: widget.owner,))),
+      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SingleAssignmentBig(description: widget.description, title: widget.title,color: dateColor(), assignmentID: widget.assignmentID, owner: widget.owner,assignment: widget.assignment,))),
       child: Container(
           alignment: Alignment.center,
           margin: const EdgeInsets.only(left: 20, right: 20),
@@ -72,9 +72,9 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                               //print(future.data?.length);
                               return Container(
                                   child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
-                                  InkWell(
-                                    onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
-                                    child: const Icon(Icons.settings, color: Style.text, size: 40,),
+                                      InkWell(
+                                        onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
+                                        child: const Icon(Icons.settings, color: Style.text, size: 40,),
                                   ) :
                                   Container()
                               );

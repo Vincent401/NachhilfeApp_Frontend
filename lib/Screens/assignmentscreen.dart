@@ -153,7 +153,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                           return SingleAssignment(
                             title: list[index].name,
                             done: false,
-                            date: DateTime(2022,12,20),
+                            date: DateTime(2023,01,6),
                             description: list[index].description,
                             assignmentID: list[index].id,
                             owner: list[index].owner,

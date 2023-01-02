@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Elemente/_task.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
@@ -13,7 +14,7 @@ import '../Task/taskcreate.dart';
 //import '../help/calls.dart';
 
 class SingleAssignmentBig extends StatefulWidget {
-  const SingleAssignmentBig({Key? key, required this.title, required this.description, required this.color, required this.assignmentID, required this.owner}) : super(key: key);
+  const SingleAssignmentBig({Key? key, required this.title, required this.description, required this.color, required this.assignmentID, required this.owner, required this.assignment}) : super(key: key);
 
   //final DateTime date;
   final String title;
@@ -21,6 +22,7 @@ class SingleAssignmentBig extends StatefulWidget {
   final Color color;
   final String assignmentID;
   final String owner;
+  final Assignment assignment;
 
   @override
   State<SingleAssignmentBig> createState() => _SingleAssignmentBigState();
@@ -165,6 +167,7 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                               solution: list[index].correctSolution,
                               taskName: list[index].name,
                               task: list[index],
+                              assignment: widget.assignment,
                             );
                           }
                       );
