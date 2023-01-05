@@ -69,9 +69,9 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                               return Container();
                             } else {
                               DocumentSnapshot<Object?>? list = future.data;
-                              //print(future.data?.length);
+                              print(list!['chats']);
                               return Container(
-                                  child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
+                                  child: widget.assignment.owner.compareTo(list['id']) == 0 ?
                                       InkWell(
                                         onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AssignmentChangePage(currAssignment: widget.assignment,))),
                                         child: const Icon(Icons.settings, color: Style.text, size: 40,),

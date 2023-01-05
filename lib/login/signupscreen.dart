@@ -260,24 +260,30 @@ class _SignUpPageState extends State<SignUpPage> {
               InkWell(
                 onTap: (){
                   try{
-                    FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: emailcontroller.text, password: passwordcontroller.text).then((signeduser) => {
+                    Future<String> string = postMember('${firstnamecontroller.text} ${lastnamecontroller.text}');
+                    string.then((value) {
+                      FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: emailcontroller.text, password: passwordcontroller.text).then((signeduser) => {
                         usercollection.doc(signeduser.user?.uid).set({
-                        //'username': usernamecontroller.text,
-                        'first name': firstnamecontroller.text,
-                        'last name': lastnamecontroller.text,
-                        'email': emailcontroller.text,
-                        'day of birth': daycontroller.text,
-                        'month of birth': monthcontroller.text,
-                        'year of birth': yearcontroller.text,
-                        //'password': passwordcontroller.text,
-                        'uid': signeduser.user?.uid,
-                      }),
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavigationPage())),
-                    });
-                    postMember('${firstnamecontroller.text} ${lastnamecontroller.text}', true, true);
+                          //'username': usernamecontroller.text,
+                          'firstName': firstnamecontroller.text,
+                          'lastName': lastnamecontroller.text,
+                          'email': emailcontroller.text,
+                          'dayOfBirth': daycontroller.text,
+                          'monthOfBirth': monthcontroller.text,
+                          'yearOfBirth': yearcontroller.text,
+                          //'password': passwordcontroller.text,
+                          'uid': signeduser.user?.uid,
+                          'id': value,
+                          'chats': []
+                        }),
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavigationPage())),
+                      });
+                    }
+                    ); //=> id = value,
+
                   }catch (e){
-                    //print(e);
+                    print(e);
                   }
                 },
                 child: Container(
