@@ -8,6 +8,7 @@ import 'package:nachhilfe_app/Assignments/singleassignmentsmal.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 import '../Assignments/assignmentcreate.dart';
+import '../Elemente/_assignment2.dart';
 import '../Elemente/_assignments.dart';
 //import '../help/calls/subjectcalls.dart';
 import '../help/calls/workload.dart';
@@ -75,22 +76,6 @@ class _AssignmentPageState extends State<AssignmentPage> {
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
 
-            /*List.generate(ass.length, (index), growable: true{
-              SingleAssignment(
-              title: ass[index].name,
-              done: false,
-              date: DateTime(2022,12,20),
-              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
-              ),
-            }),*/
-            //ListView.builder(),
-            /*SingleAssignment(
-              title: 'Mathe Assignment',
-              done: false,
-              date: DateTime(2022,12,20),
-              description: 'Assignment zum lernen von Mathe auf Nivaue der 1. Klasse.',
-            ),*/
-
             FutureBuilder<List<Assignment>>(
                 future: fetchAssignment(),
                 builder: (context, future){
@@ -112,7 +97,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             assignmentID: list[index].id,
                             owner: list[index].owner,
                             subject: list[index].owner,
-                            assignment: list[index],
+                            assignment: Assignment2(list[index].id, list[index].owner, list[index].subject, list[index].name, list[index].description, list[index].deleted, '2023-11-11'),
                           );
                             /*Container(
                             child: SingleAssignment(
@@ -137,13 +122,13 @@ class _AssignmentPageState extends State<AssignmentPage> {
             SizedBox(height: MediaQuery.of(context).size.height /30,),
 
             //fetchWorkloadBySchoolerId()
-            FutureBuilder<List<Assignment>>(
+            FutureBuilder<List<Assignment2>>(
                 future: fetchWorkloadBySchoolerId(),
                 builder: (context, future){
                   if(!future.hasData) {
                     return Container();
                   } else {
-                    List<Assignment>? list = future.data;
+                    List<Assignment2>? list = future.data;
                     //print(future.data?.length);
                     return ListView.builder(
                         shrinkWrap: true,

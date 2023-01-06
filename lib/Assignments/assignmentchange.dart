@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
 
-import '../Elemente/_member.dart';
+//import '../Elemente/_member.dart';
+import '../Elemente/_assignment2.dart';
 import '../Elemente/_subjects.dart';
-import '../help/calls/membercalls.dart';
+//import '../help/calls/membercalls.dart';
 import '../help/calls/subjectcalls.dart';
 //import '../help/calls/submissioncalls.dart';
 import '../help/variables.dart';
@@ -13,13 +14,11 @@ import 'package:http/http.dart' as http;
 TextEditingController titelcontroller = TextEditingController();
 TextEditingController descrcontrooller = TextEditingController();
 TextEditingController subjectcontroller = TextEditingController();
-TextEditingController zuweisencontroller = TextEditingController();
-TextEditingController datecontroller = TextEditingController();
 
 class AssignmentChangePage extends StatefulWidget {
   const AssignmentChangePage({Key? key, required this.currAssignment}) : super(key: key);
 
-  final Assignment currAssignment;
+  final Assignment2 currAssignment;
 
   @override
   State<AssignmentChangePage> createState() => _AssignmentChangePageState();
@@ -39,8 +38,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
 
   final Future<List<Subjects>> subjects = fetchSubjectAll();
   Subjects? currSub;
-  final Future<List<Member>> member = fetchMemberAll();
-  Member? currMem;
 
   @override
   Widget build(BuildContext context) {
@@ -227,101 +224,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                 height: MediaQuery.of(context).size.height / 25,
               ),
 
-              Container(
-                alignment: Alignment.centerLeft,
-                width: MediaQuery.of(context).size.width * 0.85,
-                margin: const EdgeInsets.only(left: 30),
-                child: Text(
-                  'Zuweisen',
-                  style: mystyle(20),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 100,
-              ),
-
-              FutureBuilder<List<Member>>(
-                  future: member,
-                  builder: (context, future){
-                    if(!future.hasData) {
-                      //print('da kommt nix');
-                      return Container();
-                    } else {
-                      List<Member>? list = future.data;
-                      Member? dropdownValue;
-                      if(currMem!= null){
-                        dropdownValue = currMem;
-                      }
-                      return Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          //height: MediaQuery.of(context).size.height * 0.3,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                            color: Style.lightback,
-                          ),
-                          child: SizedBox(
-                            width:MediaQuery.of(context).size.width * 0.83,
-                            child: DropdownButton<Member>(
-                              value: dropdownValue,
-                              icon: const Icon(Icons.arrow_downward,color: Style.accent,),
-                              elevation: 16,
-                              style: const TextStyle(color: Style.text, fontSize: 18),
-                              dropdownColor: Style.lightback,
-                              onChanged: (Member? value) {
-                                // This is called when the user selects an item.
-                                setState(() {
-                                  dropdownValue = value;
-                                  zuweisencontroller.text = value!.id;
-                                  currMem = value;
-                                  //print(value.name);
-                                });
-                              },
-                              items: list?.map<DropdownMenuItem<Member>>((Member value) {
-                                return DropdownMenuItem<Member>(
-                                  value: value,
-                                  child: Text(value.name),//
-                                );
-                              }).toList(),
-                            ),
-                          )
-                      );
-                    }
-                  }
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
-
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: InkWell(
-                  onTap: () {
-                     DateTime date = _selectDate(context);
-                    datecontroller.text = date.year.toString();
-                    //postSubmission(datecontroller.text);
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width > 250
-                        ? 250
-                        : MediaQuery.of(context).size.width,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Style.accent),
-                    child: Center(
-                      child: Text(
-                        'Enddatum auswählen',
-                        style: mystyle(20, Style.text),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
-
               SizedBox(
                 height: MediaQuery.of(context).size.height / 25,
               ),
@@ -329,7 +231,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: () {
-                    putAssignment(widget.currAssignment, currSub!);
+                    putAssignment(Assignment(widget.currAssignment.id, widget.currAssignment.owner, widget.currAssignment.subject, widget.currAssignment.name, widget.currAssignment.description, widget.currAssignment.deleted), currSub!);
                     Navigator.pop(context);
                     /*Navigator.push(
                         context,
@@ -366,29 +268,3 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
   }
 }
 
-_selectDate(BuildContext context) async {
-  final DateTime? selected = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime.now(),
-    lastDate: DateTime.now().add(const Duration(days: 365)),
-    builder: (context, child) {
-      return Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(
-            primary: Style.accent,
-            onPrimary: Style.text,
-            onSurface: Style.text,
-          ),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-            ),
-          ),
-          dialogBackgroundColor: Style.back
-        ),
-        child: child!,
-      );
-    },
-  );
-  return selected;
-}

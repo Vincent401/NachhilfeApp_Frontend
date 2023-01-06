@@ -5,27 +5,30 @@ import 'package:http/http.dart' as http;
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Elemente/_workload.dart';
 
+import '../../Elemente/_assignment2.dart';
 import '../variables.dart';
 
 List<Workload> parseWorkload(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Workload>((json) =>Workload.fromMap(json)).toList();
 }
-Future<List<Assignment>> fetchWorkloadBySchoolerId() async {
+Future<List<Assignment2>> fetchWorkloadBySchoolerId() async {
 
   DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
 
   var url = Uri.parse('http://localhost:8080/api/v1/workload/bySchooler/${userdoc['id']}');
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    List<Assignment> assignments = [];
+    List<Assignment2> assignments = [];
+    List<String> date = [];
     List<Workload> workload = parseWorkload(response.body);
     for(Workload w in workload){//var v in newMap.values
       List<Assignment> a = await fetchAssignmentById(w.assignmentID);
       try{
-        assignments.add(a.first);
+        assignments.add(Assignment2(a.first.id, a.first.owner, a.first.subject, a.first.name, a.first.description, a.first.deleted, w.dueDate));
+        date.add(w.dueDate);
       }catch(e){
-        print(e);
+        //print(e);
       }
     }
     return assignments;

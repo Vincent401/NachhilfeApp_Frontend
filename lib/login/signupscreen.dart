@@ -283,7 +283,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ); //=> id = value,
 
                   }catch (e){
-                    print(e);
+                    //print(e);
                   }
                 },
                 child: Container(

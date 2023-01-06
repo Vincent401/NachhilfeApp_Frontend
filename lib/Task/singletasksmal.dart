@@ -7,6 +7,7 @@ import 'package:nachhilfe_app/Task/singletaskbig.dart';
 import 'package:nachhilfe_app/Task/taskchange.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
+import '../Elemente/_assignment2.dart';
 import '../Elemente/_task.dart';
 
 class SingleTaskElement extends StatefulWidget {
@@ -18,7 +19,7 @@ class SingleTaskElement extends StatefulWidget {
   final String taskName;
   final String solution;
   final Task task;
-  final Assignment assignment;
+  final Assignment2 assignment;
 
   @override
   State<SingleTaskElement> createState() => _SingleTaskElementState();
@@ -62,7 +63,25 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+
+                    FutureBuilder<DocumentSnapshot<Object?>>(
+                        future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
+                        builder: (context, future){
+                          if(!future.hasData) {
+                            return Container();
+                          } else {
+                            DocumentSnapshot<Object?>? list = future.data;
+                            //print(list!['chats']);
+                            return Container(
+                                child: widget.assignment.owner.compareTo(list!['id']) != 0 ?
+                                InkWell(
+                                  child: Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
+                                ) :
+                                Container()
+                            );
+                          }
+                        }
+                    ),
                     FutureBuilder<DocumentSnapshot<Object?>>(
                         future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
                         builder: (context, future){

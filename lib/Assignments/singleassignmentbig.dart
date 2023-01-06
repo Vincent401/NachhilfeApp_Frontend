@@ -9,6 +9,7 @@ import 'package:nachhilfe_app/Elemente/_task.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
 //import '../Elemente/_assignments.dart';
+import '../Elemente/_assignment2.dart';
 import '../Task/singletasksmal.dart';
 import '../Task/taskcreate.dart';
 //import '../help/calls.dart';
@@ -22,7 +23,7 @@ class SingleAssignmentBig extends StatefulWidget {
   final Color color;
   final String assignmentID;
   final String owner;
-  final Assignment assignment;
+  final Assignment2 assignment;
 
   @override
   State<SingleAssignmentBig> createState() => _SingleAssignmentBigState();
@@ -54,6 +55,7 @@ Future<List<Task>> fetchTask(String assignmentID) async {
 class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
   @override
   Widget build(BuildContext context) {
+    DateTime t = DateTime(int.parse(widget.assignment.date.substring(0,4)), int.parse(widget.assignment.date.substring(5,7)), int.parse(widget.assignment.date.substring(8,10)));
     return Scaffold(
       backgroundColor: Style.back,
       body: SingleChildScrollView(
@@ -79,14 +81,36 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height /25,),
-              Container(
-                alignment: Alignment.centerRight,
-                child: Text('Fälligkeitsdatum:', style: mystyle(17, widget.color),),
+
+              FutureBuilder<DocumentSnapshot<Object?>>(
+                  future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
+                  builder: (context, future){
+                    if(!future.hasData) {
+                      return Container();
+                    } else {
+                      DocumentSnapshot<Object?>? list = future.data;
+                      //print(list!['chats']);
+                      return Container(
+                          child: widget.assignment.owner.compareTo(list!['id']) != 0 ?
+                          Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerRight,
+                                child: Text('Fälligkeitsdatum:', style: mystyle(17, widget.color),),
+                              ),
+                              Container(
+                                alignment: Alignment.centerRight,
+                                child: Text('${t.day}.${t.month}.${t.year}', style: mystyle(17, widget.color),), //'${widget.date.day}.${widget.date.month}.${widget.date.year}'
+                              ),
+                            ],
+                          )
+                           :
+                          Container()
+                      );
+                    }
+                  }
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: Text('NaN', style: mystyle(17, widget.color),), //'${widget.date.day}.${widget.date.month}.${widget.date.year}'
-              ),
+
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
                 alignment: Alignment.centerLeft,
@@ -163,7 +187,7 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                             return SingleTaskElement(
                               title: 'Aufgabe ${index + 1}',
                               done: false,
-                              date: DateTime.now(),
+                              date: t,
                               solution: list[index].correctSolution,
                               taskName: list[index].name,
                               task: list[index],

@@ -62,64 +62,67 @@ class _SingleChatBigState extends State<SingleChatBig> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.only(top: 5, bottom: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.1,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(40)),
-                color: Style.lightback,
+      bottomNavigationBar: Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          margin: EdgeInsets.only(top: 5, bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.1,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
+                  color: Style.lightback,
+                ),
+                child: TextField(
+                  style: mystyle(18, Style.text),
+                  cursorColor: Style.accent,
+                  controller: messageController,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                      hintText: 'Nachricht....',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40)),
+                      hintStyle: mystyle(20, Colors.grey, FontWeight.w300),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        const BorderSide(width: 2, color: Style.accent),
+                        borderRadius: BorderRadius.circular(30),
+                      )),
+                ),
               ),
-              child: TextField(
-                style: mystyle(18, Style.text),
-                cursorColor: Style.accent,
-                controller: messageController,
-                maxLines: 1,
-                decoration: InputDecoration(
-                    hintText: 'Nachricht....',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    hintStyle: mystyle(20, Colors.grey, FontWeight.w300),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      const BorderSide(width: 2, color: Style.accent),
-                      borderRadius: BorderRadius.circular(30),
-                    )),
-              ),
-            ),
-            Container(
-              height: 70,
-              width: 70,
-              alignment: Alignment.bottomCenter,
-              child: InkWell(
-                onTap: () {
-                  if(messageController.text.compareTo('') != 0){
-                    print('It works');
-                    newChatMessage(messageController.text, widget.chatId);
-                    messageController.text = '';
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(60),
-                      color: Style.accent),
-                  child: const Center(
-                    child: Icon(
-                      Icons.send_rounded,
-                      size: 55,
-                      color: Style.text,
-                    )
+              Container(
+                height: 70,
+                width: 70,
+                alignment: Alignment.bottomCenter,
+                child: InkWell(
+                  onTap: () {
+                    if(messageController.text.compareTo('') != 0){
+                      //('It works');
+                      newChatMessage(messageController.text, widget.chatId);
+                      messageController.text = '';
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(60),
+                        color: Style.accent),
+                    child: const Center(
+                      child: Icon(
+                        Icons.send_rounded,
+                        size: 55,
+                        color: Style.text,
+                      )
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

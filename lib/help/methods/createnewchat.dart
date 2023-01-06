@@ -21,16 +21,16 @@ void CreateNewChat(String name, String otherUserID) async{
     'ChatID': documentReference.id,
   });
 
-  DocumentReference documentReferenceUser = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid);
+  DocumentReference documentReferenceUser = usercollection.doc(FirebaseAuth.instance.currentUser?.uid);
   await documentReferenceUser.update({ //return
     'chats': FieldValue.arrayUnion([documentReference.id])
   });
-  /*if(otherUserID != ''){
-    DocumentReference documentReferenceOtherUser = await usercollection.doc(otherUserID);
-    await documentReferenceUser.update({ //return
-      'chats': FieldValue.arrayUnion([documentReference.id])
-    });
-  }*/
+
+  DocumentReference documentReferenceUser2 = usercollection.doc(otherUserID);
+  await documentReferenceUser2.update({ //return
+    'chats': FieldValue.arrayUnion([documentReference.id])
+  });
+
 }
 
 void newChatMessage(String nachricht, String chatId)async{
