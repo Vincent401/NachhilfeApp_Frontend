@@ -8,7 +8,7 @@ class Offer {
   factory Offer.fromMap(Map<String, dynamic> json) {
     return Offer(
         json['id'],
-        json['submissionID'],
+        json['subjectID'],
         json['memberID'],
         json['deleted']
     );

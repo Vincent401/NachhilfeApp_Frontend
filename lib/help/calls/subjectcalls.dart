@@ -24,10 +24,8 @@ Future<List<Subjects>> fetchSubjectAll() async {
 //Get one Subject
 Future<List<Subjects>> fetchSubjectOne(String subjectId) async {
   var url = Uri.parse('http://localhost:8080/api/v1/subjects/byId/$subjectId');
-  //print(url);
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    //print(response.body);
     return parseSubject(response.body);
   } else {
     throw Exception('Unable to fetch products from the REST API');

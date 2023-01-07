@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,6 +41,24 @@ void newChatMessage(String nachricht, String chatId)async{
     'sender':FirebaseAuth.instance.currentUser?.uid,
     'time': Timestamp.now()
   });
+
+  void getUserId(String id) async{
+    /*Stream temp = await usercollection.doc().get().asStream();
+    for (int i = 0; i < num.parse(temp.length.toString()); i++) {
+      if(id.compareTo(temp.document[i]) == 0){
+
+      }
+    }*/
+    QuerySnapshot querySnapshot = await usercollection.get();
+
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    for(int i = 0; i < num.parse(allData.length.toString()); i++){
+      if(List[i])
+    }
+    print(allData);
+
+  }
 
   /*DocumentReference documentReference = await messagescollection.add({
     'message':nachricht,
