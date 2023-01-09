@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/chat/singlemessage.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
 import '../help/methods/createnewchat.dart';
 import 'chatinfo.dart';
 
 TextEditingController messageController = TextEditingController();
-ScrollController _scrollController = new ScrollController();
+ScrollController _scrollController = ScrollController();
 
 class SingleChatBig extends StatefulWidget {
   final String chatId;
@@ -32,9 +29,7 @@ class _SingleChatBigState extends State<SingleChatBig> {
   }
 
   gettingUserData() async {
-    messages = chatcollection.doc(widget.chatId).get().asStream();  //.doc().get().asStream();// getChats(widget.chatId); //chatcollection.doc(widget.chatId).collection('messages').doc().get() as Stream?;
-    //usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get().asStream();
-    //print(messages?.length);
+    messages = chatcollection.doc(widget.chatId).get().asStream();
   }
 
   @override
@@ -65,7 +60,7 @@ class _SingleChatBigState extends State<SingleChatBig> {
       bottomNavigationBar: Padding(
         padding: MediaQuery.of(context).viewInsets,
         child: Container(
-          margin: EdgeInsets.only(top: 5, bottom: 20),
+          margin: const EdgeInsets.only(top: 5, bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
@@ -102,7 +97,6 @@ class _SingleChatBigState extends State<SingleChatBig> {
                 child: InkWell(
                   onTap: () {
                     if(messageController.text.compareTo('') != 0){
-                      //('It works');
                       newChatMessage(messageController.text, widget.chatId);
                       messageController.text = '';
                     }
@@ -148,54 +142,11 @@ class _SingleChatBigState extends State<SingleChatBig> {
                       time: messageData['time'],
                     );
                   },
-                ): CircularProgressIndicator();
+                ): const CircularProgressIndicator();
           },
         ),
       );
   }
-
-  /*chatList(){
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('chats').doc(widget.chatId).collection('messages').snapshots(),
-      builder: (context, AsyncSnapshot snapshot){
-        print('Pos 1');
-        if(snapshot.hasData){
-          print('Pos 2');
-          if(snapshot.data != null){
-            if(snapshot.data.lenght != 0){
-              print('Pos 4');
-              return Text('Lul');
-            }
-            print('Pos 3');
-            //print(snapshot.data['message'].toString());
-            if(snapshot.data. != 0){
-              print('Pos 4');
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                //itemCount: snapshot.,
-                itemBuilder: (context, index){
-                  //int reverseIndex = snapshot.data['chats'].length - index - 1;
-                  return Text(snapshot.data[index]);
-                },
-              );
-            }
-            else{
-              return noGroupWidget();
-            }
-            return Text('Lul');
-          }
-          else{
-            return noGroupWidget();
-          }
-        }
-        else{
-          return const Center(child: CircularProgressIndicator(color: Style.accent,),);
-        }
-      },
-    );
-
-  }*/
 
   noGroupWidget(){
     return Container(

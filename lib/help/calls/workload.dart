@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Elemente/_workload.dart';
-
 import '../../Elemente/_assignment2.dart';
 import '../variables.dart';
 
@@ -28,7 +27,7 @@ Future<List<Assignment2>> fetchWorkloadBySchoolerId() async {
         assignments.add(Assignment2(a.first.id, a.first.owner, a.first.subject, a.first.name, a.first.description, a.first.deleted, w.dueDate));
         date.add(w.dueDate);
       }catch(e){
-        //print(e);
+        print(e);
       }
     }
     return assignments;
@@ -44,7 +43,6 @@ List<Assignment> parseAssignment(String responseBody) {
 
 Future<List<Assignment>> fetchAssignmentById(String id) async {
   var url = Uri.parse('http://localhost:8080/api/v1/assignments/byId/$id');
-  //print(url);
   final response = await http.get(url);
   if (response.statusCode == 200) {
     return parseAssignment('[${response.body}]');//parseWorkload(response.body);

@@ -1,11 +1,5 @@
-//import 'package:flutter/fix_data.yaml';
 import 'package:flutter/material.dart';
-//import 'package:nachhilfe_app/Elemente/_assignments.dart';
-
-//import '../Elemente/_subjects.dart';
 import '../Elemente/_task.dart';
-//import '../help/calls/subjectcalls.dart';
-//import '../Screens/homescreen.dart';
 import '../help/variables.dart';
 
 import 'package:http/http.dart' as http;
@@ -24,9 +18,8 @@ class TaskChangePage extends StatefulWidget {
 
 void putTask(Task task) async {
   var url = Uri.parse('http://localhost:8080/api/v1/tasks/update/${task.id}?name=${textcontroller.text}&correctSolution=${loescontrooller.text}');
-  final response = await http.put(url); //, headers: header
+  final response = await http.put(url);
   if (response.statusCode == 200) {
-    //print('Good');
   } else {
     throw Exception('Unable to fetch products from the REST API');
   }
@@ -78,7 +71,6 @@ class _TaskChangePageState extends State<TaskChangePage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.85,
-                //height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Style.lightback,
@@ -113,7 +105,6 @@ class _TaskChangePageState extends State<TaskChangePage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.85,
-                //height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Style.lightback,
@@ -144,7 +135,6 @@ class _TaskChangePageState extends State<TaskChangePage> {
                   onTap: (){
                     putTask(widget.currTask);
                     Navigator.pop(context);
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250 ? 250 : MediaQuery.of(context).size.width,

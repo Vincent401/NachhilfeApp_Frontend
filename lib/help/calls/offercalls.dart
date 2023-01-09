@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-
 import '../../Elemente/_offer.dart';
 import '../variables.dart';
 
@@ -14,10 +13,8 @@ void postOffer(String subjectId, String id) async {
   Map<String, String> header = <String, String>{
     'Content-Type': 'application/json'
   };
-  print(body.toString());
   final response = await http.post(url,
       body: jsonEncode(body), headers: header);
-  print(response.statusCode);
   if (response.statusCode == 200) {
   } else {
     throw Exception('Unable to post to REST API');

@@ -1,9 +1,6 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-//import 'package:nachhilfe_app/login/loginscreen.dart';
-
 import '../help/calls/membercalls.dart';
 import '../main.dart';
 
@@ -192,7 +189,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Day',
-                          //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
                           prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -218,7 +214,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Month',
-                          //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
                           prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -243,7 +238,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Year',
-                          //prefixIcon: const Icon(Icons.mail_outline_outlined, color: style.accent,),
                           prefixStyle: mystyle(20, Style.accent),
                           hintStyle: mystyle(20, Colors.grey,FontWeight.w700),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -265,25 +259,22 @@ class _SignUpPageState extends State<SignUpPage> {
                       FirebaseAuth.instance.createUserWithEmailAndPassword(
                           email: emailcontroller.text, password: passwordcontroller.text).then((signeduser) => {
                         usercollection.doc(signeduser.user?.uid).set({
-                          //'username': usernamecontroller.text,
                           'firstName': firstnamecontroller.text,
                           'lastName': lastnamecontroller.text,
                           'email': emailcontroller.text,
                           'dayOfBirth': daycontroller.text,
                           'monthOfBirth': monthcontroller.text,
                           'yearOfBirth': yearcontroller.text,
-                          //'password': passwordcontroller.text,
                           'uid': signeduser.user?.uid,
                           'id': value,
-                          'chats': []
+                          'chats': ['Start']
                         }),
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavigationPage())),
                       });
                     }
-                    ); //=> id = value,
+                    );
 
-                  }catch (e){
-                    //print(e);
+                  }catch (e){print(e);
                   }
                 },
                 child: Container(

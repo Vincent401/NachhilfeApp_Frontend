@@ -1,13 +1,7 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/chat/singlechatsmal.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
-//import '../Assignments/assignmentchange.dart';
-import '../Elemente/_member.dart';
-import '../help/calls/membercalls.dart';
 import '../help/methods/createnewchat.dart';
 
 class ChatPage extends StatefulWidget {
@@ -30,11 +24,6 @@ class _ChatPageState extends State<ChatPage> {
 
   gettingUserData() async {
     chats = usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get().asStream();
-        /*.then((value) {
-      value.get('chat contacts');
-    });*/
-    //usercollection.doc(FirebaseAuth.instance.currentUser?.uid).snapshots();
-
   }
 
   @override
@@ -45,7 +34,7 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             SizedBox(height: MediaQuery.of(context).size.height /15,),
-            chatList(), //Center(child: Text('Chat screen', style: mystyle(20),))
+            chatList(),
             Container(
               alignment: Alignment.bottomRight,
                margin: const EdgeInsets.only(right: 20, top: 20),
@@ -69,8 +58,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   popUpDialog(BuildContext context){
-    final Future<List<Member>> member = fetchMemberAll();
-    Member? currMem;
     showDialog(context: context, builder: (context){
       return AlertDialog(
         backgroundColor: Style.lightback,
@@ -86,18 +73,16 @@ class _ChatPageState extends State<ChatPage> {
                 });
               },
             ),
-            //dropdownWidget()
           ],
         ),
         actions: [
-          //ElevatedButton(onPressed: (){Navigator.of(context).pop();}, child: const Text('CANCEL'),),
           Center(
             child: ElevatedButton(
               onPressed: () async {
                 setState(() {
                   _isLoading = true;
                 });
-                CreateNewChat(groupName, groupName);
+                createNewChat(groupName, groupName);
                 setState(() {
                   _isLoading = false;
                 });
@@ -109,10 +94,10 @@ class _ChatPageState extends State<ChatPage> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Style.accent),
+                          side: const BorderSide(color: Style.accent),
                       )
                   ),
-                padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 10, horizontal: 10))
+                padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 10, horizontal: 10))
               ),
               child: const Text('CREATE'),
             ),
@@ -129,7 +114,6 @@ class _ChatPageState extends State<ChatPage> {
         if(snapshot.hasData){
           if(snapshot.data['chats'] != null){
             if(snapshot.data['chats'].length != 0){
-              //print(snapshot.data['chats'].length);
               return ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -174,79 +158,4 @@ class _ChatPageState extends State<ChatPage> {
       ),
     );
   }
-
-  /*dropdownWidget(){
-    /*String dropdownValue = 'Dog';
-    return DropdownButtonFormField(
-      decoration: const InputDecoration(
-        enabledBorder: OutlineInputBorder( //<-- SEE HERE
-          borderSide: BorderSide(color: Style.accent, width: 2),
-        ),
-        focusedBorder: OutlineInputBorder( //<-- SEE HERE
-          borderSide: BorderSide(color: Style.accent, width: 2),
-        ),
-        filled: true,
-        fillColor: Style.lightback,
-      ),
-      dropdownColor: Style.lightback,
-      style: mystyle(17),
-      value: dropdownValue,
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
-      },
-      items: <String>['Dog', 'Cat', 'Tiger', 'Lion'].map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(
-            value,
-            style: TextStyle(fontSize: 20),
-          ),
-        );
-      }).toList(),
-    );*/
-
-    final growableList = <String>[];
-    String dropdownValue;
-    StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
-      builder: (context, AsyncSnapshot messageSnapshot){
-        dropdownValue = growableList.first;
-        return messageSnapshot.hasData ?
-              DropdownButtonFormField(
-          decoration: const InputDecoration(
-            enabledBorder: OutlineInputBorder( //<-- SEE HERE
-              borderSide: BorderSide(color: Style.accent, width: 2),
-            ),
-            focusedBorder: OutlineInputBorder( //<-- SEE HERE
-              borderSide: BorderSide(color: Style.accent, width: 2),
-            ),
-            filled: true,
-            fillColor: Style.lightback,
-          ),
-          dropdownColor: Style.lightback,
-          style: mystyle(17),
-          value: dropdownValue,
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
-          },
-          items: growableList.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(fontSize: 20),
-              ),
-            );
-          }).toList(),
-        )
-            : CircularProgressIndicator();
-      },
-    );
-
-  }*/
-
 }

@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Assignments/singleassignmentbig.dart';
-import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
 import '../Elemente/_assignment2.dart';
 import 'assignmentassign.dart';
 import 'assignmentchange.dart';
@@ -64,7 +62,6 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      //Icon(Icons.calendar_month_outlined, color: dateColor(), size: 30,),
                       FutureBuilder<DocumentSnapshot<Object?>>(
                           future: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get(),
                           builder: (context, future){
@@ -72,7 +69,6 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                               return Container();
                             } else {
                               DocumentSnapshot<Object?>? list = future.data;
-                              //print(list!['chats']);
                               return Container(
                                   child: widget.assignment.owner.compareTo(list!['id']) != 0 ?
                                   InkWell(
@@ -90,7 +86,6 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                               return Container();
                             } else {
                               DocumentSnapshot<Object?>? list = future.data;
-                              //print(list!['chats']);
                               return Container(
                                   child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
                                       InkWell(
@@ -109,7 +104,6 @@ class _SingleAssignmentState extends State<SingleAssignment> {
                               return Container();
                             } else {
                               DocumentSnapshot<Object?>? list = future.data;
-                              //print(list!['chats']);
                               return Container(
                                   child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
                                   InkWell(

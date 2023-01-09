@@ -1,13 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/offer/offercreate.dart';
-
 import '../Contract/contractcreate.dart';
-import '../Elemente/_offer.dart';
-import '../Elemente/_subjects.dart';
-import '../help/calls/offercalls.dart';
-import '../help/calls/subjectcalls.dart';
 import '../help/variables.dart';
 
 class StartPage extends StatefulWidget {
@@ -18,11 +12,6 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-
-  //final Future<List<Subjects>> subjects = fetchSubjectAll();
-  //Subjects? currSub;
-  //final Future<List<Offer>> offers = fetchOfferAll();
-  //Offer? currOff;
   String id = '';
 
   @override
@@ -35,7 +24,7 @@ class _StartPageState extends State<StartPage> {
             SizedBox(height: MediaQuery.of(context).size.height /15,),
             Container(
               alignment: Alignment.center,
-              child: Icon(Icons.person, size: 300,color: Style.text,),
+              child: const Icon(Icons.person, size: 300,color: Style.text,),
             ),
             StreamBuilder(
             stream: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get().asStream(),
@@ -58,16 +47,6 @@ class _StartPageState extends State<StartPage> {
               }
               return const Center(child: CircularProgressIndicator(color: Style.accent,),);
             }
-              /*stream: usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get().asStream(),
-              builder: (context, AsyncSnapshot snapshot){
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(snapshot.data['firstName'] + ' ', style: mystyle(20),),
-                    //Text(snapshot.data['lastName'], style: mystyle(20),),
-                  ],
-                );
-              }*/
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 25,

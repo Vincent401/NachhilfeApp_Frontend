@@ -1,7 +1,4 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:nachhilfe_app/Task/singletasksmal.dart';
-//import 'package:nachhilfe_app/Task/taskcreate.dart';
 import '../help/variables.dart';
 
 class TaskPage extends StatefulWidget {
@@ -14,7 +11,6 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
-    //return Center(child: Text('Task Page', style: mystyle(20),));
     return Scaffold(
       backgroundColor: Style.back,
       body: SingleChildScrollView(
@@ -24,7 +20,6 @@ class _TaskPageState extends State<TaskPage> {
               Container(
                 alignment: Alignment.center,
                       child: InkWell(
-                        //onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>const TaskCreatePage())),
                         child: Container(
                           width: MediaQuery.of(context).size.width > 320 ? 320 : MediaQuery.of(context).size.width,
                           height: 60,
@@ -45,20 +40,6 @@ class _TaskPageState extends State<TaskPage> {
                 child: Text('Erstellte Aufgaben', style: mystyle(25),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /30,),
-              /*SingleTaskElement(
-                title: 'Mathe Aufgabe',
-                done: false,
-                date: DateTime(2022,12,20),
-                solution: '2',
-                taskName: 'Rechne die Aufgabe 1 + 1',
-              ),*/
-              /*SingleTaskElement(
-                title: 'Mathe Aufgabe',
-                done: false,
-                date: DateTime(2022,12,15),
-                solution: '2',
-                taskName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),*/
 
               SizedBox(height: MediaQuery.of(context).size.height /25,),
               Container(
@@ -75,13 +56,6 @@ class _TaskPageState extends State<TaskPage> {
                 child: Text('Erledigte Aufgaben', style: mystyle(25),),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /30,),
-              /*SingleTaskElement(
-                title: 'Latein Aufgabe',
-                done: true,
-                date: DateTime(2022, 12, 15),
-                solution: 'So immer den Tyrannen',
-                taskName: 'Übersetze "sic semper tyranis"',
-              ),*/
             ],
           ),
         )

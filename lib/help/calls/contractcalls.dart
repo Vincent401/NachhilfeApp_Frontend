@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<String> postContract(String tutorId, String schoolerId, String SubjId) async {
+Future<String> postContract(String tutorId, String schoolerId, String subjId) async {
   var url = Uri.parse('http://localhost:8080/api/v1/contract/add');
   Map<String, dynamic> body = {
   'tutorID': tutorId,
   'schoolerID': schoolerId,
-  'subjectID': SubjId
+  'subjectID': subjId
   };
   Map<String, String> header = <String, String>{
     'Content-Type': 'application/json'

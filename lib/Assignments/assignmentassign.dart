@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../Elemente/_assignment2.dart';
-import '../Elemente/_assignments.dart';
 import '../Elemente/_member.dart';
 import '../help/calls/membercalls.dart';
-import '../help/calls/submissioncalls.dart';
 import '../help/calls/zuweisencalls.dart';
 import '../help/variables.dart';
 
@@ -80,7 +78,6 @@ class _AssignmentAssignPageState extends State<AssignmentAssignPage> {
                   future: member,
                   builder: (context, future){
                     if(!future.hasData) {
-                      //print('da kommt nix');
                       return Container();
                     } else {
                       List<Member>? list = future.data;
@@ -91,7 +88,6 @@ class _AssignmentAssignPageState extends State<AssignmentAssignPage> {
                       return Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.85,
-                          //height: MediaQuery.of(context).size.height * 0.3,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Style.lightback,
@@ -105,18 +101,16 @@ class _AssignmentAssignPageState extends State<AssignmentAssignPage> {
                               style: const TextStyle(color: Style.text, fontSize: 18),
                               dropdownColor: Style.lightback,
                               onChanged: (Member? value) {
-                                // This is called when the user selects an item.
                                 setState(() {
                                   dropdownValue = value;
                                   zuweisencontroller.text = value!.id;
                                   currMem = value;
-                                  //print(value.name);
                                 });
                               },
                               items: list?.map<DropdownMenuItem<Member>>((Member value) {
                                 return DropdownMenuItem<Member>(
                                   value: value,
-                                  child: Text(value.name),//
+                                  child: Text(value.name),
                                 );
                               }).toList(),
                             ),
@@ -144,7 +138,6 @@ class _AssignmentAssignPageState extends State<AssignmentAssignPage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.85,
-                //height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Style.lightback,
@@ -174,10 +167,7 @@ class _AssignmentAssignPageState extends State<AssignmentAssignPage> {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: () {
-                    _selectDate(context); //DateTime date =
-                    //datecontroller.text = date.year.toString();
-                    //print(date.year.toString());
-                    //postSubmission(datecontroller.text);
+                    _selectDate(context);
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250

@@ -2,15 +2,12 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Assignments/singleassignmentsmal.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
 import '../Assignments/assignmentcreate.dart';
 import '../Elemente/_assignment2.dart';
 import '../Elemente/_assignments.dart';
-//import '../help/calls/subjectcalls.dart';
 import '../help/calls/workload.dart';
 
 class AssignmentPage extends StatefulWidget {
@@ -31,7 +28,6 @@ Future<List<Assignment>> fetchAssignment() async {
   var url = Uri.parse('http://localhost:8080/api/v1/assignments/byOwner/${userdoc['id']}'); ///byOwner/{ownerID};
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    //print(parseAssignment(response.body)[0].description);
     return parseAssignment(response.body);
   } else {
     throw Exception('Unable to fetch products from the REST API');
@@ -39,8 +35,6 @@ Future<List<Assignment>> fetchAssignment() async {
 }
 
 class _AssignmentPageState extends State<AssignmentPage> {
-
-  //final Future<List<Assignment>> assignments = fetchAssignment();
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +80,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     //print(future.data?.length);
                     return ListView.builder(
                         shrinkWrap: true,
-                        //scrollDirection: Axis.horizontal,
-                        itemCount: list!.length, // < 6 ? list?.length : 5,
+                        itemCount: list!.length,
                         itemBuilder: (context, index){
                           return SingleAssignment(
                             title: list[index].name,
@@ -99,14 +92,6 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             subject: list[index].owner,
                             assignment: Assignment2(list[index].id, list[index].owner, list[index].subject, list[index].name, list[index].description, list[index].deleted, '2023-11-11'),
                           );
-                            /*Container(
-                            child: SingleAssignment(
-                              title: list![index].name,
-                              done: false,
-                              date: DateTime(2022,12,20),
-                              description: list[index].description,
-                            ),
-                          );*/
                         }
                     );
                   }
@@ -121,7 +106,6 @@ class _AssignmentPageState extends State<AssignmentPage> {
             ),
             SizedBox(height: MediaQuery.of(context).size.height /30,),
 
-            //fetchWorkloadBySchoolerId()
             FutureBuilder<List<Assignment2>>(
                 future: fetchWorkloadBySchoolerId(),
                 builder: (context, future){
@@ -129,11 +113,9 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     return Container();
                   } else {
                     List<Assignment2>? list = future.data;
-                    //print(future.data?.length);
                     return ListView.builder(
                         shrinkWrap: true,
-                        //scrollDirection: Axis.horizontal,
-                        itemCount: list!.length, // < 6 ? list?.length : 5,
+                        itemCount: list!.length,
                         itemBuilder: (context, index){
                           return SingleAssignment(
                             title: list[index].name,

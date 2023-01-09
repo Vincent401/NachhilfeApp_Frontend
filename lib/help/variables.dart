@@ -22,4 +22,3 @@ TextStyle mystyle(double size, [ Color color = Style.text, FontWeight fw = FontW
 
 CollectionReference usercollection = FirebaseFirestore.instance.collection('users');
 CollectionReference chatcollection = FirebaseFirestore.instance.collection('chats');
-//CollectionReference messagescollection = FirebaseFirestore.instance.collection('chats');

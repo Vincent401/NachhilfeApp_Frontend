@@ -102,7 +102,6 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                     setState(() {
                       showLoe = true;
                     });
-                    //Navigator.pop(context);
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250 ? 250 : MediaQuery.of(context).size.width,

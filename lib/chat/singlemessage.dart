@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../help/variables.dart';
 
 class SingleMessage extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SingleMessageState extends State<SingleMessage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: Text(widget.message, style: mystyle(17),)
           ),
@@ -49,7 +48,7 @@ class _SingleMessageState extends State<SingleMessage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.6,
               child: Text(widget.message, style: mystyle(17),)
           ),

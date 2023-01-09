@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/chat/singlechatbig.dart';
-
 import '../help/variables.dart';
 
 class SingleChatSmal extends StatefulWidget {
@@ -34,7 +33,7 @@ class _SingleChatSmalState extends State<SingleChatSmal> {
             child: Text(widget.name.substring(0,1).toUpperCase(), textAlign: TextAlign.center, style: mystyle(20, Style.text, FontWeight.w800),)
           ),
           title: Text(widget.name, style: mystyle(20, Style.text, FontWeight.w800)),
-          subtitle: Text('Nehme teil als ${widget.name}', style: mystyle(13, Style.text, FontWeight.w800)),
+          subtitle: Text('Ihr Chat mit ${widget.name}', style: mystyle(13, Style.text, FontWeight.w800)),
         ),
       ),
     );

@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nachhilfe_app/Elemente/_assignments.dart';
-//import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Task/singletaskbig.dart';
 import 'package:nachhilfe_app/Task/taskchange.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
 import '../Elemente/_assignment2.dart';
 import '../Elemente/_task.dart';
 
@@ -71,7 +68,6 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                             return Container();
                           } else {
                             DocumentSnapshot<Object?>? list = future.data;
-                            //print(list!['chats']);
                             return Container(
                                 child: widget.assignment.owner.compareTo(list!['id']) != 0 ?
                                 InkWell(
@@ -89,11 +85,10 @@ class _SingleTaskElementState extends State<SingleTaskElement> {
                             return Container();
                           } else {
                             DocumentSnapshot<Object?>? list = future.data;
-                            //print(future.data?.length);
                             return Container(
                                 child: widget.assignment.owner.compareTo(list!['id']) == 0 ?
                                 InkWell(
-                                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => TaskChangePage(currTask: widget.task))),//currAssignment: widget.assignment,
+                                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => TaskChangePage(currTask: widget.task))),
                                   child: const Icon(Icons.settings, color: Style.text, size: 40,),
                                 ) :
                                 Container()

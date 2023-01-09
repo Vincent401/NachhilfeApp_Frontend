@@ -2,22 +2,16 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
-import 'package:nachhilfe_app/Elemente/_assignments.dart';
 import 'package:nachhilfe_app/Elemente/_task.dart';
 import 'package:nachhilfe_app/help/variables.dart';
-
-//import '../Elemente/_assignments.dart';
 import '../Elemente/_assignment2.dart';
 import '../Task/singletasksmal.dart';
 import '../Task/taskcreate.dart';
-//import '../help/calls.dart';
 
 class SingleAssignmentBig extends StatefulWidget {
   const SingleAssignmentBig({Key? key, required this.title, required this.description, required this.color, required this.assignmentID, required this.owner, required this.assignment}) : super(key: key);
 
-  //final DateTime date;
   final String title;
   final String description;
   final Color color;
@@ -31,8 +25,6 @@ class SingleAssignmentBig extends StatefulWidget {
 
 Future<String> getOwner() async {
   DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
-  //print(userdoc['id']);
-  //print(userdoc['email']);
   return userdoc['id'];
 }
 
@@ -129,49 +121,6 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height /50,),
 
-              /*SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: DateTime.now(),
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),*//*
-              SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: widget.date,
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),
-              SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: widget.date,
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),
-              SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: widget.date,
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),
-              SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: widget.date,
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),
-              SingleTaskElement(
-                title: 'Aufgabe 1',
-                done: false,
-                date: widget.date,
-                solution: '2',
-                task: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-              ),*/
-
               FutureBuilder<List<Task>>(
                   future: fetchTask(widget.assignmentID),
                   builder: (context, future){
@@ -179,7 +128,6 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                       return Text("Keine Tasks", style: mystyle(17),);
                     } else {
                       List<Task>? list = future.data;
-                      //print(future.data?.length);
                       return ListView.builder(
                           shrinkWrap: true,
                           itemCount: list!.length,
@@ -206,7 +154,6 @@ class _SingleAssignmentBigState extends State<SingleAssignmentBig> {
                       return const Text("");
                     } else {
                       String? list = future.data;
-                      //print(future.data?.length);
                       return ListView.builder(
                           shrinkWrap: true,
                           itemCount: 1,

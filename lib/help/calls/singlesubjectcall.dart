@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../../Elemente/_subjects.dart';
 
 List<Subjects> parseSubject(String responseBody) {

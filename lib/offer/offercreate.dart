@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_offer.dart';
-
 import '../Elemente/_subjects.dart';
 import '../help/calls/offercalls.dart';
 import '../help/calls/subjectcalls.dart';
 import '../help/variables.dart';
-import 'offersmal.dart';
 
 TextEditingController subjectcontroller = TextEditingController();
 
@@ -98,7 +96,6 @@ class _OfferCreateState extends State<OfferCreate> {
                       return Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.85,
-                          //height: MediaQuery.of(context).size.height * 0.3,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Style.lightback,
@@ -112,18 +109,16 @@ class _OfferCreateState extends State<OfferCreate> {
                               style: const TextStyle(color: Style.text, fontSize: 18),
                               dropdownColor: Style.lightback,
                               onChanged: (Subjects? value) {
-                                // This is called when the user selects an item.
                                 setState(() {
                                   dropdownValue = value;
                                   subjectcontroller.text = value!.id;
                                   currSub = value;
-                                  //print(value.name);
                                 });
                               },
                               items: list?.map<DropdownMenuItem<Subjects>>((Subjects value) {
                                 return DropdownMenuItem<Subjects>(
                                   value: value,
-                                  child: Text(value.name),//
+                                  child: Text(value.name),
                                 );
                               }).toList(),
                             ),
@@ -169,39 +164,6 @@ class _OfferCreateState extends State<OfferCreate> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 25,
               ),
-
-              /*Container(
-                alignment: Alignment.centerLeft,
-                width: MediaQuery.of(context).size.width * 0.85,
-                margin: const EdgeInsets.only(left: 30),
-                child: Text(
-                  'Meine Angebote',
-                  style: mystyle(20),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                width: MediaQuery.of(context).size.width * 0.85,
-                margin: const EdgeInsets.only(left: 30),
-                child: FutureBuilder<List<Offer>>(
-                    future: offers,
-                    builder: (context, future){
-                      if(!future.hasData) {
-                        return Container();
-                      } else {
-                        List<Offer>? list = future.data;
-                        //print(future.data?.length);
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: list!.length,
-                            itemBuilder: (context, index){
-                              return OfferSmal(subjectId: list[index].subjectID,);
-                            }
-                        );
-                      }
-                    }
-                ),
-              ),*/
             ],
           ),
         ),

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_assignments.dart';
-
-//import '../Elemente/_member.dart';
 import '../Elemente/_assignment2.dart';
 import '../Elemente/_subjects.dart';
-//import '../help/calls/membercalls.dart';
 import '../help/calls/subjectcalls.dart';
-//import '../help/calls/submissioncalls.dart';
 import '../help/variables.dart';
 
 import 'package:http/http.dart' as http;
@@ -26,9 +22,8 @@ class AssignmentChangePage extends StatefulWidget {
 
 void putAssignment(Assignment assignment, Subjects subjects) async {
   var url = Uri.parse('http://localhost:8080/api/v1/assignments/update/${assignment.id}?name=${titelcontroller.text}&description=${descrcontrooller.text}&subjectId=${subjects.id}');
-  final response = await http.put(url); //, headers: header
+  final response = await http.put(url);
   if (response.statusCode == 200) {
-    //print('Good');
   } else {
     throw Exception('Unable to fetch products from the REST API');
   }
@@ -94,7 +89,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.85,
-                //height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Style.lightback,
@@ -134,7 +128,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.85,
-                //height: MediaQuery.of(context).size.height * 0.3,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Style.lightback,
@@ -186,7 +179,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                       return Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.85,
-                          //height: MediaQuery.of(context).size.height * 0.3,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Style.lightback,
@@ -200,18 +192,16 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                               style: const TextStyle(color: Style.text, fontSize: 18),
                               dropdownColor: Style.lightback,
                               onChanged: (Subjects? value) {
-                                // This is called when the user selects an item.
                                 setState(() {
                                   dropdownValue = value;
                                   subjectcontroller.text = value!.id;
                                   currSub = value;
-                                  //print(value.name);
                                 });
                               },
                               items: list?.map<DropdownMenuItem<Subjects>>((Subjects value) {
                                 return DropdownMenuItem<Subjects>(
                                   value: value,
-                                  child: Text(value.name),//
+                                  child: Text(value.name),
                                 );
                               }).toList(),
                             ),
@@ -233,12 +223,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                   onTap: () {
                     putAssignment(Assignment(widget.currAssignment.id, widget.currAssignment.owner, widget.currAssignment.subject, widget.currAssignment.name, widget.currAssignment.description, widget.currAssignment.deleted), currSub!);
                     Navigator.pop(context);
-                    /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ));*/
-                    //postSubmission(DateTime(2023,1,10));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250

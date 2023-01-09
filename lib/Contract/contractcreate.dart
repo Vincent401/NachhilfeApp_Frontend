@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_offer.dart';
-import 'package:nachhilfe_app/Elemente/_subjects.dart';
 
 import '../help/calls/contractcalls.dart';
 import '../help/calls/offercalls.dart';
-import '../help/calls/singlesubjectcall.dart';
 import '../help/methods/createnewchat.dart';
 import '../help/variables.dart';
 
@@ -77,8 +75,10 @@ class _ContractCreateState extends State<ContractCreate> {
                   future: offers,
                   builder: (context, future){
                     if(!future.hasData) {
+                      print('Pos 1');
                       return Container();
                     } else {
+                      print('Pos 2');
                       List<Offer>? list = future.data;
                       Offer? dropdownValue;
                       if(currOff!= null){
@@ -87,7 +87,6 @@ class _ContractCreateState extends State<ContractCreate> {
                       return Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width * 0.85,
-                          //height: MediaQuery.of(context).size.height * 0.3,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Style.lightback,
@@ -101,18 +100,15 @@ class _ContractCreateState extends State<ContractCreate> {
                               style: const TextStyle(color: Style.text, fontSize: 18),
                               dropdownColor: Style.lightback,
                               onChanged: (Offer? value) {
-                                // This is called when the user selects an item.
                                 setState(() {
                                   dropdownValue = value;
-                                  //subjectcontroller.text = value!.id;
                                   currOff = value;
-                                  //print(value.name);
                                 });
                               },
                               items: list?.map<DropdownMenuItem<Offer>>((Offer value) {
                                 return DropdownMenuItem<Offer>(
-                                  value: value, //
-                                  child: Text(value.subjectID),
+                                  value: value,
+                                  child: Text(value.subjectID)
                                 );
                               }).toList(),
                             ),
@@ -130,9 +126,7 @@ class _ContractCreateState extends State<ContractCreate> {
                 child: InkWell(
                   onTap: (){
                     postContract(currOff!.memberID,widget.id,currOff!.subjectID );
-                    //CreateNewChat(currOff!.subjectID,
-                        //.doc(FirebaseAuth.instance.currentUser?.uid).get().
-                    //);
+                    createNewChat('Chat Name', 'zkSxXjj9WNhd6so3AaPrsoI5lGd2');
                     Navigator.pop(context);
                   },
                   child: Container(
