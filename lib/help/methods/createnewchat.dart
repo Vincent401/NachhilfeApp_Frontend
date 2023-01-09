@@ -42,7 +42,7 @@ void newChatMessage(String nachricht, String chatId)async{
     'time': Timestamp.now()
   });
 
-  void getUserId(String id) async{
+  /*void getUserId(String id) async{
     /*Stream temp = await usercollection.doc().get().asStream();
     for (int i = 0; i < num.parse(temp.length.toString()); i++) {
       if(id.compareTo(temp.document[i]) == 0){
@@ -58,7 +58,7 @@ void newChatMessage(String nachricht, String chatId)async{
     }
     print(allData);
 
-  }
+  }*/
 
   /*DocumentReference documentReference = await messagescollection.add({
     'message':nachricht,

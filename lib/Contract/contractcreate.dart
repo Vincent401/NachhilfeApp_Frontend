@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/Elemente/_offer.dart';
 import 'package:nachhilfe_app/Elemente/_subjects.dart';
@@ -129,9 +130,9 @@ class _ContractCreateState extends State<ContractCreate> {
                 child: InkWell(
                   onTap: (){
                     postContract(currOff!.memberID,widget.id,currOff!.subjectID );
-                    CreateNewChat(currOff!.subjectID,
-                        usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get().
-                    );
+                    //CreateNewChat(currOff!.subjectID,
+                        //.doc(FirebaseAuth.instance.currentUser?.uid).get().
+                    //);
                     Navigator.pop(context);
                   },
                   child: Container(
