@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 
+TextEditingController loesungsController = TextEditingController();
+
 class SingleTaskBig extends StatefulWidget {
   const SingleTaskBig({Key? key,required this.date, required this.title, required this.task, required this.solution, required this.color}) : super(key: key);
 
@@ -15,6 +17,7 @@ class SingleTaskBig extends StatefulWidget {
 }
 
 class _SingleTaskBigState extends State<SingleTaskBig> {
+  bool showLoe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +82,7 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                   style: mystyle(18, Style.text),
                   cursorColor: Style.accent,
                   maxLines: 10,
+                  controller: loesungsController,
                   decoration: InputDecoration(
                       hintText: 'Lösung....',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
@@ -94,7 +98,10 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
                   onTap: (){
-                    Navigator.pop(context);
+                    loesungsController.text = '';
+                    setState(() {
+                      showLoe = true;
+                    });
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width > 250 ? 250 : MediaQuery.of(context).size.width,
@@ -110,6 +117,10 @@ class _SingleTaskBigState extends State<SingleTaskBig> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height /15,),
+
+              showLoe ?
+                  Text('Lösung: ${widget.solution}', style: mystyle(20),) :
+                  Container()
             ],
           ),
         ),

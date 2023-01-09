@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nachhilfe_app/help/variables.dart';
 import 'package:nachhilfe_app/login/signupscreen.dart';
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               onTap: (){
                 try {
                   FirebaseAuth.instance.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text);
-                }catch(e){/*print(e);*/}
+                }catch(e){print(e);}
               },
               child: Container(
                 width: MediaQuery.of(context).size.width > 200 ? 200 : MediaQuery.of(context).size.width,

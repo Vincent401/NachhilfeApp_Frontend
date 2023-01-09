@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:nachhilfe_app/Elemente/_assignments.dart';
-import '../Elemente/_assignment2.dart';
+import 'package:nachhilfe_app/Elemente/_offer.dart';
 import '../Elemente/_subjects.dart';
+import '../help/calls/offercalls.dart';
 import '../help/calls/subjectcalls.dart';
 import '../help/variables.dart';
 
-import 'package:http/http.dart' as http;
-
-TextEditingController titelcontroller = TextEditingController();
-TextEditingController descrcontrooller = TextEditingController();
 TextEditingController subjectcontroller = TextEditingController();
 
-class AssignmentChangePage extends StatefulWidget {
-  const AssignmentChangePage({Key? key, required this.currAssignment}) : super(key: key);
+class OfferCreate extends StatefulWidget {
+  const OfferCreate({Key? key, required this.id}) : super(key: key);
 
-  final Assignment2 currAssignment;
+  final String id;
 
   @override
-  State<AssignmentChangePage> createState() => _AssignmentChangePageState();
+  State<OfferCreate> createState() => _OfferCreateState();
 }
 
-void putAssignment(Assignment assignment, Subjects subjects) async {
-  var url = Uri.parse('http://localhost:8080/api/v1/assignments/update/${assignment.id}?name=${titelcontroller.text}&description=${descrcontrooller.text}&subjectId=${subjects.id}');
-  final response = await http.put(url);
-  if (response.statusCode == 200) {
-  } else {
-    throw Exception('Unable to fetch products from the REST API');
-  }
-}
-
-class _AssignmentChangePageState extends State<AssignmentChangePage> {
+class _OfferCreateState extends State<OfferCreate> {
 
   final Future<List<Subjects>> subjects = fetchSubjectAll();
   Subjects? currSub;
+  late Future<List<Offer>> offers;
+
+  @override
+  void initState() {
+    super.initState();
+    gettingOffers();
+  }
+
+  gettingOffers() async {
+    offers = fetchSingleOffer(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    titelcontroller.text = widget.currAssignment.name;
-    descrcontrooller.text = widget.currAssignment.description;
-    currSub;
     return Scaffold(
       backgroundColor: Style.back,
       body: SingleChildScrollView(
@@ -65,7 +60,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                   Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Assignment bearbeiten',
+                        'Neues Angebot erstellen',
                         style: mystyle(23),
                       )),
                   const Icon(null)
@@ -74,84 +69,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 25,
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                width: MediaQuery.of(context).size.width * 0.85,
-                margin: const EdgeInsets.only(left: 30),
-                child: Text(
-                  'Titel',
-                  style: mystyle(20),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 100,
-              ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width * 0.85,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Style.lightback,
-                ),
-                child: TextField(
-                  style: mystyle(18, Style.text),
-                  cursorColor: Style.accent,
-                  controller: titelcontroller,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      hintText: 'Mathe Assignment....',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      hintStyle: mystyle(20, Colors.grey, FontWeight.w300),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                        const BorderSide(width: 2, color: Style.accent),
-                        borderRadius: BorderRadius.circular(30),
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                width: MediaQuery.of(context).size.width * 0.85,
-                margin: const EdgeInsets.only(left: 30),
-                child: Text(
-                  'Beschreibung',
-                  style: mystyle(20),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 100,
-              ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width * 0.85,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Style.lightback,
-                ),
-                child: TextField(
-                  style: mystyle(18, Style.text),
-                  cursorColor: Style.accent,
-                  maxLines: 5,
-                  controller: descrcontrooller,
-                  decoration: InputDecoration(
-                      hintText: 'Mathe Assignment zu....',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      hintStyle: mystyle(20, Colors.grey, FontWeight.w300),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                        const BorderSide(width: 2, color: Style.accent),
-                        borderRadius: BorderRadius.circular(30),
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
+
               Container(
                 alignment: Alignment.centerLeft,
                 width: MediaQuery.of(context).size.width * 0.85,
@@ -164,7 +82,6 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 100,
               ),
-
               FutureBuilder<List<Subjects>>(
                   future: subjects,
                   builder: (context, future){
@@ -220,8 +137,11 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
               Container(
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
-                  onTap: () {
-                    putAssignment(Assignment(widget.currAssignment.id, widget.currAssignment.owner, widget.currAssignment.subject, widget.currAssignment.name, widget.currAssignment.description, widget.currAssignment.deleted), currSub!);
+                  onTap: (){
+                    postOffer(currSub!.id.toString(), widget.id);
+                    setState(() {
+                      offers = fetchSingleOffer(widget.id);
+                    });
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -234,7 +154,7 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
                         color: Style.accent),
                     child: Center(
                       child: Text(
-                        'speichern',
+                        'Angebot erstellen',
                         style: mystyle(20, Style.text),
                       ),
                     ),
@@ -251,4 +171,3 @@ class _AssignmentChangePageState extends State<AssignmentChangePage> {
     );
   }
 }
-

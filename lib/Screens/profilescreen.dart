@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../help/variables.dart';
 
@@ -18,7 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onTap: (){
           try {
             FirebaseAuth.instance.signOut();
-          }catch(e){/*print(e);*/}
+          }catch(e){print(e);}
         },
         child: Container(
           width: MediaQuery.of(context).size.width > 200 ? 200 : MediaQuery.of(context).size.width,
